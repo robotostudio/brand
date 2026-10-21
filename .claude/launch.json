@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "carousel-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-I", "templates/linkedin-carousel/serve.py", "4173"],
+      "port": 4173
+    }
+  ]
+}

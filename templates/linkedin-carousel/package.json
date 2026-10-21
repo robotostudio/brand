@@ -1,0 +1,12 @@
+{
+  "name": "roboto-linkedin-carousel",
+  "private": true,
+  "type": "module",
+  "description": "Renders Roboto Studio LinkedIn carousel decks to PDF and PNG previews.",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.56.0"
+  }
+}

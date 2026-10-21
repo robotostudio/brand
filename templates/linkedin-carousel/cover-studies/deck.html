@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Cover studies</title>
+<link rel="stylesheet" href="../carousel.css">
+</head>
+<!-- One cover, five treatments. Copy the .art block you need from here.
+     Art covers set the headline in .h1 (two lines max) so the art keeps the top of the slide. -->
+<body data-theme="dark" data-series="Field notes">
+
+<!-- A. Type only (the default; always a valid choice) -->
+<section class="slide" data-meta="A · Type only">
+  <div class="tex top-half tex-lines fade-b"></div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="display">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<!-- B. Blueprint glyph: one hatched symbol for the topic, as on the service pages -->
+<section class="slide" data-meta="B · Blueprint">
+  <div class="tex top-half tex-dots fade-l"></div>
+  <div class="art pad">
+    <div class="blueprint"><span class="crop"></span>
+      <div class="tex-dots fade-b"></div>
+      <svg viewBox="0 0 460 460" aria-hidden="true">
+        <defs>
+          <pattern id="hatch-b" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="12" stroke="currentColor" stroke-width="2.5"/>
+          </pattern>
+        </defs>
+        <text x="230" y="318" text-anchor="middle" font-size="300" letter-spacing="-12"
+              fill="url(#hatch-b)" stroke="currentColor" stroke-width="2.5">{ }</text>
+      </svg>
+    </div>
+  </div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="h1">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<!-- C. Scene: the problem shown as product UI. Tide accent inside the scene, so no pink on this slide. -->
+<section class="slide" data-meta="C · Scene">
+  <div class="art">
+    <div class="scene"></div>
+    <div class="window" style="left: 380px; top: 36px; width: 520px; height: 300px; opacity: 0.55;">
+      <div class="titlebar"><span class="lights"><i></i><i></i><i></i></span>Case study</div>
+    </div>
+    <div class="window" style="left: 56px; top: 28px; width: 620px; height: 640px;">
+      <div class="titlebar"><span class="lights"><i></i><i></i><i></i></span>Homepage</div>
+      <div class="card">
+        <div class="field"><span class="k">heroTitle</span><span class="v">Websites that scale</span></div>
+        <div class="field"><span class="k">heroTitleLine2</span><span class="v">with your team</span></div>
+        <div class="field"><span class="k">section3Text</span><span class="v">We build…</span></div>
+        <div class="field tide"><span class="k">section3TextAlt</span><span class="v"></span></div>
+      </div>
+    </div>
+    <svg class="cursor" viewBox="0 0 24 24" style="left: 560px; top: 500px;" aria-hidden="true">
+      <path d="M4 2l15 10-7 1.5L8.5 21z" fill="#FAFAF8" stroke="#0B0C0E" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="h1">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<!-- D. Schematic: the idea drawn as structure. One content type feeding many pages. -->
+<section class="slide" data-meta="D · Schematic">
+  <div class="tex full tex-dots fade-b"></div>
+  <div class="art">
+    <svg class="schematic" viewBox="0 0 952 620" aria-hidden="true">
+      <!-- wires: fields into the type -->
+      <path class="wire" d="M240 136 H290 V298 H336"/>
+      <path class="wire" d="M240 298 H336"/>
+      <path class="wire" d="M240 460 H290 V298"/>
+      <!-- wires: type out to pages -->
+      <path class="wire" d="M616 298 H662 V136 H712"/>
+      <path class="wire" d="M662 298 H712"/>
+      <path class="wire" d="M662 298 V460 H712"/>
+      <rect class="joint" x="284" y="292" width="12" height="12"/>
+      <rect class="joint" x="656" y="292" width="12" height="12"/>
+      <!-- fields -->
+      <g class="node"><rect x="40" y="100" width="200" height="72"/><text x="64" y="146">client</text></g>
+      <g class="node"><rect x="40" y="262" width="200" height="72"/><text x="64" y="308">outcome</text></g>
+      <g class="node"><rect x="40" y="424" width="200" height="72"/><text x="64" y="470">quote</text></g>
+      <!-- type -->
+      <g class="node on"><rect x="336" y="244" width="280" height="108"/>
+        <text class="sub" x="364" y="284">TYPE</text><text x="364" y="326">caseStudy</text></g>
+      <rect class="pinkdot" x="330" y="238" width="12" height="12"/>
+      <!-- pages -->
+      <g class="node"><rect x="712" y="100" width="200" height="72"/><text x="736" y="146">/work</text></g>
+      <g class="node"><rect x="712" y="262" width="200" height="72"/><text x="736" y="308">/sanity</text></g>
+      <g class="node"><rect x="712" y="424" width="200" height="72"/><text x="736" y="470">/</text></g>
+    </svg>
+  </div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="h1">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<!-- E. Cropped artefact: the real string, set huge. Dim lines may run off the page; the bright line must stay whole. -->
+<section class="slide" data-meta="E · Artefact">
+  <div class="art bleed pad">
+<div class="giant">heroTitleLine2,
+section3Text,
+<span class="k">section3Alt</span><span class="p">_</span></div>
+  </div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="h1">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<script src="../carousel.js"></script>
+</body>
+</html>

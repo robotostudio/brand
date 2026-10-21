@@ -1,0 +1,442 @@
+/* Roboto Studio LinkedIn carousel kit.
+   One slide = one 1080 x 1350 page (4:5). Read systems/linkedin-carousel/ before editing.
+   Everything is sized for a 1080px canvas that LinkedIn shows at about 36% on a phone,
+   so every size here is roughly 2.8x what it would be on the website. */
+
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=block");
+
+/* ---------- Tokens ---------- */
+
+:root {
+  --w: 1080px;
+  --h: 1350px;
+
+  /* Frame geometry */
+  --rail: 64px;          /* inset of the vertical rails from the page edge */
+  --band: 120px;         /* height of the header and footer bands */
+  --pad: 56px;           /* content inset from the rails */
+  --hair: 2px;           /* a hairline on this canvas; 1px vanishes on a phone */
+
+  /* Type scale (px on the 1080 canvas) */
+  --t-mega: 340px;       /* one number, up to 4 characters ("87%", "3wk"); add .long for 5-6 ("4,812") */
+  --t-display: 132px;    /* cover lines, 2-6 words */
+  --t-h1: 100px;         /* the slide's single statement */
+  --t-h2: 72px;
+  --t-h3: 52px;
+  --t-body: 40px;        /* never smaller than 36px for anything people must read */
+  --t-small: 32px;
+  --t-label: 24px;       /* mono uppercase labels; the floor */
+
+  /* Spacing */
+  --s1: 16px;
+  --s2: 24px;
+  --s3: 40px;
+  --s4: 64px;
+  --s5: 96px;
+
+  --pink: #FF00A8;
+  --font: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, monospace;
+}
+
+/* Dark is the default deck theme. Values from design.md, zinc only. */
+:root,
+[data-theme="dark"] {
+  --bg: #141414;
+  --fg: #FAFAFA;
+  --body: #E4E4E7;       /* zinc-200: running text a step under headlines */
+  --muted: #A1A1AA;      /* zinc-400: labels, secondary text */
+  --dim: #71717A;        /* zinc-500: the second voice of a two-tone headline */
+  --line: #2E2E33;       /* between zinc-800 and zinc-700 so a 2px rule survives downscaling */
+  --surface: #1C1C1F;
+  --surface-2: #27272A;  /* zinc-800 */
+  --logo: url("../../assets/shared/logo/roboto-wordmark-dark.svg");
+  --mark: url("../../assets/shared/logo/roboto-r-dark.svg");
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --fg: #09090B;
+  --body: #27272A;
+  --muted: #71717A;
+  --dim: #A1A1AA;
+  --line: #E4E4E7;
+  --surface: #F4F4F5;
+  --surface-2: #E4E4E7;
+  --logo: url("../../assets/shared/logo/roboto-wordmark-light.svg");
+  --mark: url("../../assets/shared/logo/roboto-r-light.svg");
+  color-scheme: light;
+}
+
+/* A dark deck's one inverted slide uses .invert (white page), a light deck's uses .invert (black page). */
+[data-theme="dark"] .slide.invert,
+body:not([data-theme]) .slide.invert {
+  --bg: #FFFFFF; --fg: #09090B; --body: #27272A; --muted: #71717A; --dim: #A1A1AA;
+  --line: #E4E4E7; --surface: #F4F4F5; --surface-2: #E4E4E7;
+  --logo: url("../../assets/shared/logo/roboto-wordmark-light.svg");
+  --mark: url("../../assets/shared/logo/roboto-r-light.svg");
+}
+[data-theme="light"] .slide.invert {
+  --bg: #000000; --fg: #FAFAFA; --body: #E4E4E7; --muted: #A1A1AA; --dim: #71717A;
+  --line: #2E2E33; --surface: #1C1C1F; --surface-2: #27272A;
+  --logo: url("../../assets/shared/logo/roboto-wordmark-dark.svg");
+  --mark: url("../../assets/shared/logo/roboto-r-dark.svg");
+}
+
+/* ---------- Page ---------- */
+
+@page { size: 1080px 1350px; margin: 0; }
+
+*, *::before, *::after { box-sizing: border-box; border-radius: 0; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  font-weight: 400;
+  font-feature-settings: "ss01" 0;
+  -webkit-font-smoothing: antialiased;
+  background: #0a0a0a;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media screen {
+  body { display: grid; gap: 40px; justify-content: center; padding: 40px 0; }
+}
+
+h1, h2, h3, h4, p, ol, ul, figure, blockquote { margin: 0; padding: 0; font-weight: 400; }
+ol, ul { list-style: none; }
+strong, b { font-weight: 500; }
+img { display: block; max-width: 100%; }
+
+/* ---------- Slide and frame ---------- */
+
+.slide {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  break-after: page;
+  page-break-after: always;
+}
+.slide:last-child { break-after: auto; page-break-after: auto; }
+
+/* Rails and rules (drawn by carousel.js as .frame) */
+.frame { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.frame::before, .frame::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: var(--hair); background: var(--line);
+}
+.frame::before { left: var(--rail); }
+.frame::after { right: var(--rail); }
+.frame .rule { position: absolute; left: 0; right: 0; height: var(--hair); background: var(--line); }
+.frame .rule.top { top: var(--band); }
+.frame .rule.bottom { bottom: var(--band); }
+
+.chrome-head, .chrome-foot {
+  position: absolute; left: var(--rail); right: var(--rail); height: var(--band);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--pad); z-index: 4;
+}
+.chrome-head { top: 0; }
+.chrome-foot { bottom: 0; }
+
+.logo {
+  width: 255px; height: 25px;              /* 182 x 18 wordmark at 1.4x */
+  background: var(--logo) no-repeat left center / contain;
+}
+
+/* Content area: everything between the rails and bands */
+.content {
+  position: absolute;
+  top: var(--band); bottom: var(--band);
+  left: var(--rail); right: var(--rail);
+  padding: var(--s5) var(--pad);
+  display: flex; flex-direction: column;
+  gap: var(--s3);
+  z-index: 2;
+}
+.content.tight { padding-top: var(--s4); padding-bottom: var(--s4); }
+.content.flush { padding: 0; }            /* for full-bleed screenshots or grids inside the rails */
+.content.center { justify-content: center; }
+.content.bottom { justify-content: flex-end; }
+
+/* Floating chrome: the only rounded, frosted element (design.md, Surfaces) */
+.swipe {
+  display: inline-flex; align-items: center; gap: 14px;
+  height: 56px; padding: 0 24px 0 28px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  border: var(--hair) solid color-mix(in srgb, var(--fg) 14%, transparent);
+  border-top-color: color-mix(in srgb, var(--fg) 32%, transparent);
+  backdrop-filter: blur(16px);
+  font: 500 var(--t-label)/1 var(--mono);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--fg);
+}
+.swipe svg, .chev { width: 14px; height: 22px; fill: currentColor; flex: none; }
+
+/* ---------- Type ---------- */
+
+.label, .eyebrow, .counter, .meta {
+  font: 400 var(--t-label)/1.2 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow { display: flex; gap: 20px; align-items: baseline; }
+.eyebrow .idx { color: var(--fg); }
+
+.display, .h1, .h2, .h3 { color: var(--fg); text-wrap: balance; }
+.display { font-size: var(--t-display); line-height: 0.96; letter-spacing: -0.05em; }
+.h1 { font-size: var(--t-h1); line-height: 1; letter-spacing: -0.045em; }
+.h2 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -0.04em; }
+.h3 { font-size: var(--t-h3); line-height: 1.1; letter-spacing: -0.03em; }
+
+.body, .lead { font-size: var(--t-body); line-height: 1.35; letter-spacing: -0.01em; color: var(--body); text-wrap: pretty; }
+.lead { color: var(--muted); }
+.small { font-size: var(--t-small); line-height: 1.35; color: var(--muted); }
+
+/* Two-tone: the brand's main emphasis device. Bright claim, dim continuation. */
+.dim { color: var(--dim); }
+.muted { color: var(--muted); }
+/* The rare pink moment. One per slide at most, a handful per deck. */
+.pink, mark { color: var(--pink); background: none; }
+
+.mega {
+  font-size: var(--t-mega); line-height: 0.82; letter-spacing: -0.07em;
+  font-variant-numeric: tabular-nums; color: var(--fg);
+}
+.mega.long { font-size: 250px; }
+.mega .unit { font-size: 0.4em; letter-spacing: -0.04em; color: var(--dim); }
+
+.mono { font-family: var(--mono); letter-spacing: 0; }
+.measure { max-width: 780px; }
+.measure-s { max-width: 620px; }
+
+/* ---------- Layout helpers ---------- */
+
+.stack { display: flex; flex-direction: column; gap: var(--s3); }
+.stack-s { display: flex; flex-direction: column; gap: var(--s2); }
+.stack-l { display: flex; flex-direction: column; gap: var(--s4); }
+.row { display: flex; gap: var(--s3); align-items: center; }
+.push { margin-top: auto; }
+.grow { flex: 1; min-height: 0; }
+.rule-h { height: var(--hair); background: var(--line); flex: none; }
+
+/* ---------- Components ---------- */
+
+/* Numbered list: mono index, hairline between items */
+.list { display: flex; flex-direction: column; }
+.list > li {
+  display: grid; grid-template-columns: 96px 1fr; align-items: baseline;
+  padding: 28px 0; border-top: var(--hair) solid var(--line);
+  font-size: var(--t-h3); line-height: 1.12; letter-spacing: -0.03em; color: var(--fg);
+}
+.list > li:last-child { border-bottom: var(--hair) solid var(--line); }
+.list > li .n { font: 400 var(--t-label)/1 var(--mono); letter-spacing: 0.08em; color: var(--muted); }
+.list > li .dim { color: var(--dim); }
+.list.compact > li { font-size: var(--t-body); padding: 22px 0; }
+.list > li.done .n::before { content: "\25A0  "; color: var(--fg); }   /* square bullet */
+
+/* Compare: two stacked halves (portrait-friendly bad vs good, before vs after, X vs Y) */
+.compare { display: grid; grid-template-rows: 1fr 1fr; border: var(--hair) solid var(--line); flex: 1; min-height: 0; }
+.compare.cols { grid-template-rows: none; grid-template-columns: 1fr 1fr; }
+.compare > div { padding: var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
+.compare > div + div { border-top: var(--hair) solid var(--line); }
+.compare.cols > div + div { border-top: 0; border-left: var(--hair) solid var(--line); }
+.compare .is-bad { color: var(--dim); }
+.compare .is-bad .h3, .compare .is-bad .body { color: var(--dim); }
+.compare .is-bad .label::before { content: "\00D7  "; }
+.compare .is-good { background: var(--surface); }
+.compare .is-good .label { color: var(--fg); }
+.compare .is-good .label::before { content: "\25A0  "; }
+
+/* Cell grid: hairline grid, cells share one line (design.md) */
+.cells { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: var(--hair); background: var(--line); border: var(--hair) solid var(--line); }
+.cells > * { background: var(--bg); padding: var(--s3); display: flex; flex-direction: column; gap: var(--s1); min-height: 220px; }
+.cells .h3 { margin-top: auto; }
+
+/* Stat block for a single figure with context */
+.stat { display: flex; flex-direction: column; gap: var(--s2); }
+.stat .value { font-size: 200px; line-height: 0.86; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+
+/* Screenshot / artefact frame with crop marks, echoing the site's tiles */
+.shot { position: relative; margin: 18px; background: var(--surface); border: var(--hair) solid var(--line); }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.shot::before, .shot::after,
+.shot > .crop::before, .shot > .crop::after {
+  content: ""; position: absolute; width: 36px; height: 36px; pointer-events: none;
+  border-color: var(--muted); border-style: solid; border-width: 0;
+}
+.shot::before { top: -18px; left: -18px; border-right-width: var(--hair); border-bottom-width: var(--hair); }
+.shot::after { bottom: -18px; right: -18px; border-left-width: var(--hair); border-top-width: var(--hair); }
+.shot > .crop::before { top: -18px; right: -18px; border-left-width: var(--hair); border-bottom-width: var(--hair); }
+.shot > .crop::after { bottom: -18px; left: -18px; border-right-width: var(--hair); border-top-width: var(--hair); }
+.shot.grow { flex: 1; min-height: 0; }
+.shot .caption { position: absolute; left: 0; bottom: -56px; }
+
+/* Browser bar for website screenshots */
+.browser { display: flex; flex-direction: column; }
+.browser .bar {
+  display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 24px; flex: none;
+  border-bottom: var(--hair) solid var(--line);
+  font: 400 var(--t-label)/1 var(--mono); color: var(--muted);
+}
+.browser .bar::before { content: ""; width: 12px; height: 12px; background: var(--dim); box-shadow: 22px 0 var(--dim), 44px 0 var(--dim); margin-right: 52px; }
+.browser .view { flex: 1; min-height: 0; overflow: hidden; }
+
+/* Receipt: mono block for real machine strings (redirect maps, terminal, schema, file trees) */
+.receipt {
+  font: 400 30px/1.6 var(--mono); color: var(--body);
+  border: var(--hair) solid var(--line); background: var(--surface);
+  padding: var(--s3); white-space: pre; overflow: hidden;
+}
+.receipt .c { color: var(--dim); }       /* comment */
+.receipt .k { color: var(--fg); }        /* key / emphasis */
+.receipt .ok { color: var(--fg); }
+.receipt .p { color: var(--pink); }      /* the one thing to notice */
+
+/* Chips: mono bordered tags for tools, stacks, file names */
+.chips { display: flex; flex-wrap: wrap; gap: 14px; }
+.chip {
+  font: 400 var(--t-label)/1 var(--mono); letter-spacing: 0.04em;
+  padding: 14px 18px; border: var(--hair) solid var(--line); color: var(--fg);
+}
+
+/* Flow: vertical steps joined by a rail with square nodes */
+.flow { display: flex; flex-direction: column; position: relative; padding-left: 64px; }
+.flow::before { content: ""; position: absolute; left: 11px; top: 20px; bottom: 20px; width: var(--hair); background: var(--line); }
+.flow > li { position: relative; padding: 22px 0; display: flex; flex-direction: column; gap: 10px; }
+.flow > li::before { content: ""; position: absolute; left: -64px; top: 34px; width: 24px; height: 24px; background: var(--bg); border: var(--hair) solid var(--muted); }
+.flow > li.on::before { background: var(--fg); border-color: var(--fg); }
+.flow .h3 { font-size: var(--t-h3); }
+
+/* Tile: crop-marked square for a logo or glyph, as on the site's service cards */
+.tile { position: relative; width: 240px; height: 240px; margin: 18px; background: var(--surface); border: var(--hair) solid var(--line); display: grid; place-items: center; }
+.tile img { width: 55%; height: 55%; object-fit: contain; }
+
+/* Quote */
+.quote { font-size: var(--t-h2); line-height: 1.08; letter-spacing: -0.04em; color: var(--fg); text-indent: -0.42em; }
+.quote + .label { margin-top: var(--s2); }
+
+/* CTA block on the last slide */
+.cta-box { border: var(--hair) solid var(--line); padding: var(--s3); display: flex; justify-content: space-between; align-items: center; }
+.cta-box .h3 { display: flex; align-items: center; gap: 24px; }
+
+/* ---------- Textures (use one per slide, behind content, never behind body text) ---------- */
+
+.tex { position: absolute; z-index: 1; pointer-events: none; }
+.tex.full { top: var(--band); bottom: var(--band); left: var(--rail); right: var(--rail); }
+.tex.top-half { top: var(--band); left: var(--rail); right: var(--rail); height: 45%; }
+.tex.bottom-half { bottom: var(--band); left: var(--rail); right: var(--rail); height: 45%; }
+
+.tex-lines { background: repeating-linear-gradient(90deg, var(--line) 0 var(--hair), transparent var(--hair) 30px); }
+.tex-hlines { background: repeating-linear-gradient(0deg, var(--line) 0 var(--hair), transparent var(--hair) 34px); }
+.tex-dots {
+  background-image: radial-gradient(circle, var(--dim) 1.6px, transparent 2px);
+  background-size: 32px 32px;
+  opacity: 0.55;
+}
+.fade-r { mask-image: linear-gradient(90deg, #000 0%, transparent 85%); -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 85%); }
+.fade-l { mask-image: linear-gradient(270deg, #000 0%, transparent 85%); -webkit-mask-image: linear-gradient(270deg, #000 0%, transparent 85%); }
+.fade-b { mask-image: linear-gradient(180deg, #000 0%, transparent 90%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 90%); }
+.fade-t { mask-image: linear-gradient(0deg, #000 0%, transparent 90%); -webkit-mask-image: linear-gradient(0deg, #000 0%, transparent 90%); }
+
+/* ---------- Cover art ----------
+   One illustration per deck, on the cover (and optionally echoed on the last slide).
+   Four sanctioned forms, all drawn from the site: blueprint glyph, scene, schematic, cropped artefact.
+   Art sits behind .content in the top of the slide; content anchors to the bottom. */
+
+.art {
+  position: absolute; z-index: 1;
+  top: var(--band); left: var(--rail); right: var(--rail);
+  height: 620px;
+  overflow: hidden;
+}
+.art.tall { height: 740px; }
+.art.bleed { right: 0; }        /* let an artefact run off the right edge of the page */
+.art.pad { padding: var(--s5) var(--pad) 0; }
+
+/* Blueprint glyph: hatched outline in a crop-marked tile, as on the service pages */
+.blueprint { position: relative; width: 460px; height: 460px; margin: 18px; background: var(--surface); border: var(--hair) solid var(--line); }
+.blueprint::before, .blueprint::after,
+.blueprint > .crop::before, .blueprint > .crop::after {
+  content: ""; position: absolute; width: 48px; height: 48px; border: 0 solid var(--muted);
+}
+.blueprint::before { top: -24px; left: -24px; border-right-width: var(--hair); border-bottom-width: var(--hair); }
+.blueprint::after { bottom: -24px; right: -24px; border-left-width: var(--hair); border-top-width: var(--hair); }
+.blueprint > .crop::before { top: -24px; right: -24px; border-left-width: var(--hair); border-bottom-width: var(--hair); }
+.blueprint > .crop::after { bottom: -24px; left: -24px; border-right-width: var(--hair); border-top-width: var(--hair); }
+.blueprint .tex-dots { position: absolute; inset: 0; }
+.blueprint svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--muted); }
+.blueprint svg text { font-family: var(--font); }
+
+/* Scene: product UI in glass windows on a grainy neutral ground (motion.md, Scenes).
+   Inside a scene only: rounded 16px glass and the Tide accent are allowed; no pink on that slide. */
+.scene {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(80% 90% at 85% 10%, #4A4D52 0%, transparent 60%),
+    radial-gradient(70% 80% at 10% 100%, #3A3C40 0%, transparent 65%),
+    radial-gradient(60% 60% at 40% 40%, #1E1F22 0%, transparent 70%),
+    #131416;
+}
+.scene::after {             /* film grain */
+  content: ""; position: absolute; inset: 0; opacity: 0.22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+[data-theme="light"] .scene, .slide.invert .scene {
+  background:
+    radial-gradient(80% 90% at 85% 10%, #9A9EA3 0%, transparent 60%),
+    radial-gradient(70% 80% at 10% 100%, #B0B3B6 0%, transparent 65%),
+    radial-gradient(60% 60% at 40% 40%, #E7E5DF 0%, transparent 70%),
+    #D2D1CB;
+}
+.window {
+  position: absolute; z-index: 1;
+  border-radius: 16px;
+  background: rgb(26 27 29 / 0.55);
+  backdrop-filter: blur(22px);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-top-color: rgb(255 255 255 / 0.28);
+  color: #FAFAF8;
+  overflow: hidden;
+}
+.window .titlebar {
+  height: 64px; display: flex; align-items: center; gap: 16px; padding: 0 24px;
+  font: 500 26px/1 var(--font); letter-spacing: -0.01em; color: #A4A4A4;
+  border-bottom: 1px solid #2E2F30;
+}
+.window .lights { display: flex; gap: 10px; margin-right: 12px; }
+.window .lights i { width: 16px; height: 16px; border-radius: 50%; background: #4A4D52; }
+.window .card { margin: 20px; padding: 24px 28px; border-radius: 10px; background: #1A1B1D; display: flex; flex-direction: column; gap: 10px; }
+.window .field { display: flex; flex-direction: column; gap: 10px; padding: 18px 0; border-top: 1px solid #2E2F30; }
+.window .field:first-child { border-top: 0; }
+.window .field .k { font: 400 24px/1 var(--mono); color: #A4A4A4; }
+.window .field .v { height: 40px; border: 1px solid #2E2F30; border-radius: 6px; padding: 0 14px; display: flex; align-items: center; font: 400 26px/1 var(--font); color: #FAFAF8; }
+.window .field.tide .v { border-color: #9FDCCF; box-shadow: 0 0 0 3px rgb(159 220 207 / 0.18); }
+.window .field.tide .k { color: #9FDCCF; }
+.cursor { position: absolute; z-index: 2; width: 44px; height: 44px; }
+
+/* Schematic: a structural diagram in hairlines and mono labels. Draw it as inline SVG. */
+.schematic { position: absolute; inset: 0; width: 100%; height: 100%; }
+.schematic .wire { fill: none; stroke: var(--muted); stroke-width: 2; }
+.schematic .wire.dim { stroke: var(--line); }
+.schematic .node rect { fill: var(--bg); stroke: var(--muted); stroke-width: 2; }
+.schematic .node.on rect { fill: var(--surface-2); stroke: var(--fg); }
+.schematic .node text { font: 400 26px var(--mono); fill: var(--fg); }
+.schematic .node .sub { font-size: 24px; fill: var(--muted); letter-spacing: 0.06em; }
+.schematic .joint { fill: var(--fg); }
+.schematic .pinkdot { fill: var(--pink); }
+
+/* Cropped artefact: a real machine string set huge and allowed to bleed past the rails */
+.giant {
+  font: 400 130px/1.04 var(--mono); letter-spacing: -0.05em; white-space: pre;
+  color: var(--dim);
+}
+.giant .k { color: var(--fg); }
+.giant .p { color: var(--pink); }

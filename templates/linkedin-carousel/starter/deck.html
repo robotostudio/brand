@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>[Deck title]</title>
+<!-- Paths assume this file lives at carousels/<slug>/deck.html. Copy the folder there before rendering. -->
+<link rel="stylesheet" href="../../templates/linkedin-carousel/carousel.css">
+</head>
+<!-- Starter deck. Replace every [bracket], delete slides you don't need, add moves from the specimen:
+     templates/linkedin-carousel/specimen/deck.html
+     Rules: systems/linkedin-carousel/README.md -->
+<body data-theme="dark" data-series="[Series]">
+
+<!-- 01 Cover: 3-10 words, two-tone, the boldest and emptiest slide -->
+<section class="slide">
+  <div class="tex top-half tex-dots fade-l"></div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">[Series]</span><span>[Topic]</span></div>
+    <h1 class="display">[Bright claim] <span class="dim">[dim continuation.]</span></h1>
+    <p class="lead measure-s">[Optional promise, 4-10 words.]</p>
+  </div>
+</section>
+
+<!-- 02 Statement: one idea, nothing else -->
+<section class="slide">
+  <div class="content center">
+    <div class="eyebrow"><span class="idx">01</span><span>[Label]</span></div>
+    <h2 class="h1">[Claim.] <span class="dim">[Consequence or context.]</span></h2>
+  </div>
+</section>
+
+<!-- 03 List -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">02</span><span>[Label]</span></div>
+    <h2 class="h2">[Heading] <span class="dim">[dim end.]</span></h2>
+    <ol class="list push">
+      <li><span class="n">01</span><span>[Item]</span></li>
+      <li><span class="n">02</span><span>[Item] <span class="dim">[detail]</span></span></li>
+      <li><span class="n">03</span><span>[Item]</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 04 Compare -->
+<section class="slide">
+  <div class="content tight">
+    <div class="eyebrow"><span class="idx">03</span><span>[Label]</span></div>
+    <div class="compare">
+      <div class="is-bad">
+        <div class="label">[Bad / Before / Old way]</div>
+        <p class="h3">[The mistake, 6-16 words.]</p>
+      </div>
+      <div class="is-good">
+        <div class="label">[Good / After / Our way]</div>
+        <p class="h3">[The fix.] <span class="dim">[Why it works.]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Recap + question + CTA (last slide: the frame hides the swipe pill) -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">04</span><span>Save this</span></div>
+    <ol class="list compact">
+      <li class="done"><span class="n">01</span><span>[Takeaway]</span></li>
+      <li class="done"><span class="n">02</span><span>[Takeaway]</span></li>
+      <li class="done"><span class="n">03</span><span>[Takeaway]</span></li>
+    </ol>
+    <p class="h2 push">[Question people can answer] <span class="dim">[from experience?]</span></p>
+    <div class="cta-box"><span class="label">robotostudio.com</span><span class="h3">Get in touch <i class="chev"></i></span></div>
+  </div>
+</section>
+
+<script src="../../templates/linkedin-carousel/carousel.js"></script>
+</body>
+</html>

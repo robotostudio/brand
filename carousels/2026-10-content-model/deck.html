@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Your site breaks at handover</title>
+<link rel="stylesheet" href="../../templates/linkedin-carousel/carousel.css">
+</head>
+<!-- Example deck, format: one argument. Topic chosen from research.md recommendation 3
+     (buyer pain: the site breaking when it's handed to the content team). No invented figures. -->
+<body data-theme="dark" data-series="Field notes">
+
+<!-- Cover: schematic art (taste.md 6a). The diagram is the deck's argument: one type feeding many pages. -->
+<section class="slide">
+  <div class="tex full tex-dots fade-b"></div>
+  <div class="art">
+    <svg class="schematic" viewBox="0 0 952 620" aria-hidden="true">
+      <!-- wires: fields into the type -->
+      <path class="wire" d="M240 136 H290 V298 H336"/>
+      <path class="wire" d="M240 298 H336"/>
+      <path class="wire" d="M240 460 H290 V298"/>
+      <!-- wires: type out to pages -->
+      <path class="wire" d="M616 298 H662 V136 H712"/>
+      <path class="wire" d="M662 298 H712"/>
+      <path class="wire" d="M662 298 V460 H712"/>
+      <rect class="joint" x="284" y="292" width="12" height="12"/>
+      <rect class="joint" x="656" y="292" width="12" height="12"/>
+      <!-- fields -->
+      <g class="node"><rect x="40" y="100" width="200" height="72"/><text x="64" y="146">client</text></g>
+      <g class="node"><rect x="40" y="262" width="200" height="72"/><text x="64" y="308">outcome</text></g>
+      <g class="node"><rect x="40" y="424" width="200" height="72"/><text x="64" y="470">quote</text></g>
+      <!-- type -->
+      <g class="node on"><rect x="336" y="244" width="280" height="108"/>
+        <text class="sub" x="364" y="284">TYPE</text><text x="364" y="326">caseStudy</text></g>
+      <rect class="pinkdot" x="330" y="238" width="12" height="12"/>
+      <!-- pages -->
+      <g class="node"><rect x="712" y="100" width="200" height="72"/><text x="736" y="146">/work</text></g>
+      <g class="node"><rect x="712" y="262" width="200" height="72"/><text x="736" y="308">/sanity</text></g>
+      <g class="node"><rect x="712" y="424" width="200" height="72"/><text x="736" y="470">/</text></g>
+    </svg>
+  </div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">Field notes</span><span>Content modelling</span></div>
+    <h1 class="h1">Your site breaks <span class="dim">at handover.</span></h1>
+    <p class="lead measure-s">The day the content team logs in.</p>
+  </div>
+</section>
+
+<!-- The pattern -->
+<section class="slide">
+  <div class="content center">
+    <div class="eyebrow"><span class="idx">01</span><span>The pattern</span></div>
+    <h2 class="h1">Designers build pages. <span class="dim">Editors publish things: products, people, case studies.</span></h2>
+  </div>
+</section>
+
+<!-- The tell -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">02</span><span>The tell</span></div>
+    <h2 class="h2">Fields named <span class="dim">after the layout.</span></h2>
+<pre class="receipt push"><span class="c">// schemas/homepage.ts</span>
+defineType({
+  name: <span class="k">'homepage'</span>,
+  fields: [
+    heroTitle,
+    heroTitleLine2,
+    section3Text,
+    <span class="p">section3TextAlt</span>,
+  ],
+})</pre>
+  </div>
+</section>
+
+<!-- What happens next -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">03</span><span>Six months later</span></div>
+    <ol class="flow push">
+      <li class="on"><span class="label">Week 1</span><span class="h3">Marketing wants a new page</span></li>
+      <li class="on"><span class="label">Week 2</span><span class="h3">No field fits, so they paste HTML</span></li>
+      <li class="on"><span class="label">Week 6</span><span class="h3">The same case study lives in four places</span></li>
+      <li><span class="label">Month 6</span><span class="h3 dim">"We need a new CMS."</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Compare -->
+<section class="slide">
+  <div class="content tight">
+    <div class="eyebrow"><span class="idx">04</span><span>The fix</span></div>
+    <div class="compare">
+      <div class="is-bad">
+        <div class="label">Page model</div>
+        <p class="h3">One homepage document with forty fields.</p>
+      </div>
+      <div class="is-good">
+        <div class="label">Content model</div>
+        <p class="h3">One case study type, used on six pages. <span class="dim">Edit once, updated everywhere.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The good schema -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">05</span><span>The rule</span></div>
+    <h2 class="h2">Name fields <span class="dim">after what they mean.</span></h2>
+<pre class="receipt push"><span class="c">// schemas/caseStudy.ts</span>
+defineType({
+  name: <span class="k">'caseStudy'</span>,
+  fields: [
+    client,
+    sector,
+    outcome,
+    services,
+    quote,
+  ],
+})</pre>
+  </div>
+</section>
+
+<!-- Before any design -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">06</span><span>Before any design</span></div>
+    <h2 class="h2">Four questions <span class="dim">for the editors.</span></h2>
+    <ol class="list push">
+      <li><span class="n">01</span><span>What do you publish?</span></li>
+      <li><span class="n">02</span><span>What repeats?</span></li>
+      <li><span class="n">03</span><span>What links to what?</span></li>
+      <li><span class="n">04</span><span>Who edits which part?</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- The turn: the one inverted slide -->
+<section class="slide invert">
+  <div class="tex bottom-half tex-dots fade-t"></div>
+  <div class="content center">
+    <div class="eyebrow"><span class="idx">07</span><span>The order</span></div>
+    <h2 class="h1">Design the content. <span class="dim">Then design the pages.</span></h2>
+  </div>
+</section>
+
+<!-- Recap -->
+<section class="slide">
+  <div class="content">
+    <div class="eyebrow"><span class="idx">08</span><span>Save this</span></div>
+    <h2 class="h2">Handover-proof <span class="dim">in four rules.</span></h2>
+    <ol class="list compact push">
+      <li class="done"><span class="n">01</span><span>Model types before pages</span></li>
+      <li class="done"><span class="n">02</span><span>Name fields after meaning</span></li>
+      <li class="done"><span class="n">03</span><span>Reference content, never copy it</span></li>
+      <li class="done"><span class="n">04</span><span>Put editors in the Studio early</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Question + CTA -->
+<section class="slide">
+  <div class="tex top-half tex-lines fade-b"></div>
+  <div class="content bottom">
+    <div class="eyebrow"><span class="idx">09</span><span>Over to you</span></div>
+    <p class="h1">Where did your last site <span class="pink">break first?</span></p>
+    <div class="cta-box"><span class="label">robotostudio.com</span><span class="h3">Get in touch <i class="chev"></i></span></div>
+  </div>
+</section>
+
+<script src="../../templates/linkedin-carousel/carousel.js"></script>
+</body>
+</html>
