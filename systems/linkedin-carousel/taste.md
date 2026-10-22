@@ -47,7 +47,7 @@ The two best-performing carousels in our research showed real work: a real workf
 Never use stock photos, 3D renders, isometric illustrations, icon grids, illustrated people, AI-generated imagery or device mockups at an angle. The textures (`.tex-dots`, `.tex-lines`, `.tex-hlines`) are decoration, and a slide gets one at most.
 
 ### 6a. Cover art: drawn, never decorated
-A cover may carry **one** illustration, in one of four forms taken from the site (see [components.md](components.md#cover-art) and the [cover studies](../../templates/linkedin-carousel/cover-studies/deck.html)):
+A cover may carry **one** illustration, in one of four forms taken from the site (see [components.md](components.md#cover-art) and the [cover studies](cover-studies/deck.html)):
 
 | Form | Looks like | Best when |
 |---|---|---|

@@ -1,0 +1,3 @@
+# Rendered output is rebuilt from deck.html, so only the reference example keeps it in git.
+*/out/
+!2026-10-content-model/out/

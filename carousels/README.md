@@ -1,7 +1,7 @@
 # Carousels
 
-One folder per LinkedIn carousel, named `yyyy-mm-short-slug`. Each holds `deck.html`, `caption.md`, `img/` and the rendered `out/` (PDF, slide PNGs, contact sheet).
+One folder per LinkedIn carousel, named `yyyy-mm-short-slug`. Each holds `deck.html`, `caption.md` and `img/`. Rendering creates `out/` (PDF, slide PNGs, contact sheet), which is git-ignored; rebuild it with `node systems/linkedin-carousel/kit/render.mjs carousels/<slug>/deck.html`.
 
-Start a deck by copying `templates/linkedin-carousel/starter/` here, then follow [systems/linkedin-carousel](../systems/linkedin-carousel/).
+Start a deck by copying `systems/linkedin-carousel/starter/` here, then follow [systems/linkedin-carousel](../systems/linkedin-carousel/).
 
-`2026-10-content-model/` is the reference example.
+`2026-10-content-model/` is the reference example and the one deck whose `out/` is committed.

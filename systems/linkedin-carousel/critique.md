@@ -4,7 +4,7 @@ A deck isn't finished when it renders. It's finished after you've looked at it a
 
 ## The loop
 
-1. Render: `node templates/linkedin-carousel/render.mjs carousels/<slug>/deck.html`
+1. Render: `node systems/linkedin-carousel/kit/render.mjs carousels/<slug>/deck.html`
 2. Fix every `ERROR` in the lint output. Read every `warn` and either fix it or decide, for a reason you could state, to keep it.
 3. **Open `out/contact-sheet.png` and look at it.** That's the phone view. Run the checks below.
 4. Open the full-size `out/slides/NN.png` for any slide that failed a check, and fix it.

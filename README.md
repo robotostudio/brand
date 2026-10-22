@@ -11,15 +11,14 @@ brand-monorepo/
 ├── design.md               # Shared brand rules
 ├── README.md               # Repository map and getting started
 ├── systems/                # Specialised execution guidance
-│   ├── linkedin-carousel/  # LinkedIn PDF carousels: taste, copy, components, critique
+│   ├── linkedin-carousel/  # LinkedIn PDF carousels: rules, kit, starter, specimen
 │   ├── voice/
 │   └── motion/
 ├── assets/                 # Approved files ready to use
 │   ├── shared/             # logo/ holds the approved logo SVGs
 │   └── motion/
 ├── templates/              # Reusable starting points
-│   └── linkedin-carousel/  # Carousel CSS, frame script, renderer, starter, specimen
-└── carousels/              # One folder per LinkedIn carousel deck
+└── carousels/              # LinkedIn carousel decks (content, not system)
 ```
 
 ## Start here
@@ -36,6 +35,6 @@ brand-monorepo/
 | Instructions for a discipline, channel or format | [systems/](systems/) |
 | An approved file someone can use in production | [assets/](assets/) |
 | A reusable starting point someone can copy and adapt | [templates/](templates/) |
-| A LinkedIn carousel deck (source, caption, PDF) | [carousels/](carousels/) |
+| A LinkedIn carousel deck (source and caption; the PDF is rebuilt, not committed) | [carousels/](carousels/) |
 
-Systems and templates build on `design.md`. Link to shared rules instead of duplicating them. Document format-specific adaptations in the relevant system and resolve conflicts with the shared guidance.
+A system that ships its own tooling keeps it inside its folder (for example `systems/linkedin-carousel/kit/`), so rules and code change together. Systems and templates build on `design.md`. Link to shared rules instead of duplicating them. Document format-specific adaptations in the relevant system and resolve conflicts with the shared guidance.

@@ -1,6 +1,6 @@
 # Components
 
-The kit lives in [templates/linkedin-carousel/](../../templates/linkedin-carousel/). The markup for every component below is in the [specimen deck](../../templates/linkedin-carousel/specimen/deck.html), and you can see it rendered in [`specimen/out/contact-sheet.png`](../../templates/linkedin-carousel/specimen/out/contact-sheet.png). Copy markup from the specimen; don't write it from memory.
+The kit lives in [kit/](kit/). The markup for every component below is in the [specimen deck](specimen/deck.html), and you can see it rendered in [`specimen/out/contact-sheet.png`](specimen/out/contact-sheet.png). Copy markup from the specimen; don't write it from memory.
 
 Treat these as a vocabulary, not a set of fixed layouts. Combine them freely inside `.content`, as long as the result stays within [taste.md](taste.md).
 
@@ -68,7 +68,7 @@ Each move below has a job. Pick the move for the job, then write copy to fit it.
 
 ## Cover art
 
-Markup for all four forms is in [cover-studies/deck.html](../../templates/linkedin-carousel/cover-studies/deck.html), rendered in `cover-studies/out/contact-sheet.png`. When and why to use each one is in [taste.md](taste.md) §6a.
+Markup for all four forms is in [cover-studies/deck.html](cover-studies/deck.html), rendered in `cover-studies/out/contact-sheet.png`. When and why to use each one is in [taste.md](taste.md) §6a.
 
 ```html
 <section class="slide">

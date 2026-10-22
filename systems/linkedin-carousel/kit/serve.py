@@ -1,5 +1,5 @@
 # Serve the repo for previewing decks in a browser, with caching off so edits show on reload.
-#   python3 templates/linkedin-carousel/serve.py   ->  http://localhost:4173/carousels/<slug>/deck.html
+#   python3 systems/linkedin-carousel/kit/serve.py   ->  http://localhost:4173/carousels/<slug>/deck.html
 # Run it from the repo root. Opening deck.html straight from disk can break the relative CSS, JS and logo paths.
 import http.server
 import sys

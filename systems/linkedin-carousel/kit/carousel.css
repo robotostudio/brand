@@ -50,8 +50,8 @@
   --line: #2E2E33;       /* between zinc-800 and zinc-700 so a 2px rule survives downscaling */
   --surface: #1C1C1F;
   --surface-2: #27272A;  /* zinc-800 */
-  --logo: url("../../assets/shared/logo/roboto-wordmark-dark.svg");
-  --mark: url("../../assets/shared/logo/roboto-r-dark.svg");
+  --logo: url("../../../assets/shared/logo/roboto-wordmark-dark.svg");
+  --mark: url("../../../assets/shared/logo/roboto-r-dark.svg");
   color-scheme: dark;
 }
 
@@ -64,8 +64,8 @@
   --line: #E4E4E7;
   --surface: #F4F4F5;
   --surface-2: #E4E4E7;
-  --logo: url("../../assets/shared/logo/roboto-wordmark-light.svg");
-  --mark: url("../../assets/shared/logo/roboto-r-light.svg");
+  --logo: url("../../../assets/shared/logo/roboto-wordmark-light.svg");
+  --mark: url("../../../assets/shared/logo/roboto-r-light.svg");
   color-scheme: light;
 }
 
@@ -74,14 +74,14 @@
 body:not([data-theme]) .slide.invert {
   --bg: #FFFFFF; --fg: #09090B; --body: #27272A; --muted: #71717A; --dim: #A1A1AA;
   --line: #E4E4E7; --surface: #F4F4F5; --surface-2: #E4E4E7;
-  --logo: url("../../assets/shared/logo/roboto-wordmark-light.svg");
-  --mark: url("../../assets/shared/logo/roboto-r-light.svg");
+  --logo: url("../../../assets/shared/logo/roboto-wordmark-light.svg");
+  --mark: url("../../../assets/shared/logo/roboto-r-light.svg");
 }
 [data-theme="light"] .slide.invert {
   --bg: #000000; --fg: #FAFAFA; --body: #E4E4E7; --muted: #A1A1AA; --dim: #71717A;
   --line: #2E2E33; --surface: #1C1C1F; --surface-2: #27272A;
-  --logo: url("../../assets/shared/logo/roboto-wordmark-dark.svg");
-  --mark: url("../../assets/shared/logo/roboto-r-dark.svg");
+  --logo: url("../../../assets/shared/logo/roboto-wordmark-dark.svg");
+  --mark: url("../../../assets/shared/logo/roboto-r-dark.svg");
 }
 
 /* ---------- Page ---------- */

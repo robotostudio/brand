@@ -21,22 +21,24 @@ Background: [research.md](research.md), the October 2026 study of carousels in o
 3. **Write the deck as text**, one line per slide, in `caption.md` or a scratch note. Read it top to bottom. Cut until each line is one idea.
 4. **Set up the folder:**
    ```bash
-   cp -R templates/linkedin-carousel/starter carousels/2026-11-short-slug
+   cp -R systems/linkedin-carousel/starter carousels/2026-11-short-slug
    ```
-5. **Build it.** Edit `deck.html`: one `<section class="slide">` per slide. Pick a move per slide from [components.md](components.md) and copy its markup from the [specimen](../../templates/linkedin-carousel/specimen/deck.html).
+5. **Build it.** Edit `deck.html`: one `<section class="slide">` per slide. Pick a move per slide from [components.md](components.md) and copy its markup from the [specimen](specimen/deck.html).
 6. **Render:**
    ```bash
-   node templates/linkedin-carousel/render.mjs carousels/2026-11-short-slug/deck.html
+   node systems/linkedin-carousel/kit/render.mjs carousels/2026-11-short-slug/deck.html
    ```
-   (First time only: `npm install --prefix templates/linkedin-carousel && npx --prefix templates/linkedin-carousel playwright install chromium`.)
+   (First time only: `npm install --prefix systems/linkedin-carousel/kit && npx --prefix systems/linkedin-carousel/kit playwright install chromium`.)
 
    To watch the deck live while you edit, serve the repo and open the deck over http. Opening `deck.html` straight from disk can break its relative CSS, JS and logo paths, and you'll see unstyled text.
    ```bash
-   python3 templates/linkedin-carousel/serve.py
+   python3 systems/linkedin-carousel/kit/serve.py
    ```
    Then open `http://localhost:4173/carousels/2026-11-short-slug/deck.html`. In the Claude desktop app, the `carousel-preview` entry in `.claude/launch.json` starts the same server. Slides shrink to fit the window on screen; the render is always full size. The rendered PNGs and contact sheet remain the source of truth.
 7. **Critique and fix** following [critique.md](critique.md). Look at `out/contact-sheet.png` every pass.
 8. **Write the caption** in `caption.md` and hand over.
+
+Rendered output (`out/`) for decks in `carousels/` is git-ignored: commit `deck.html`, `caption.md` and `img/`, and anyone can rebuild the PDF with one command. Only the reference decks (the specimen, the cover studies and the example deck) keep their `out/` in git so you can see finished work without rendering.
 
 ## The non-negotiables
 
@@ -56,17 +58,18 @@ The lint in `render.mjs` enforces most of these.
 ## Files
 
 ```text
-systems/linkedin-carousel/      the rules (you are here)
-templates/linkedin-carousel/
-├── carousel.css                the visual system
-├── carousel.js                 draws the frame on every slide
-├── render.mjs                  HTML → PDF + PNGs + contact sheet + lint
-├── serve.py                    local preview server (no caching)
+systems/linkedin-carousel/      everything needed to make a carousel (you are here)
+├── README.md, taste.md, copy.md, components.md, critique.md, research.md
+├── kit/
+│   ├── carousel.css            the visual system
+│   ├── carousel.js             draws the frame on every slide
+│   ├── render.mjs              HTML → PDF + PNGs + contact sheet + lint
+│   └── serve.py                local preview server (no caching)
 ├── starter/                    copy this to start a deck
 ├── specimen/                   every component, rendered
 └── cover-studies/              one cover in all four art forms, plus type only
-carousels/<yyyy-mm-slug>/       one folder per deck
-assets/shared/logo/             approved logo files
+carousels/<yyyy-mm-slug>/       the decks: one folder each, output not committed
+assets/shared/logo/             approved logo files, shared across formats
 ```
 
 `carousels/2026-10-content-model/` is a finished example deck that shows the system in use.

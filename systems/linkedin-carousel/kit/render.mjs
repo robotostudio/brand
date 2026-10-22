@@ -2,7 +2,7 @@
 // Render a carousel deck to the LinkedIn PDF, per-slide PNGs and a phone-scale contact sheet,
 // then lint it against the system's rules.
 //
-//   node templates/linkedin-carousel/render.mjs carousels/<slug>/deck.html
+//   node systems/linkedin-carousel/kit/render.mjs carousels/<slug>/deck.html
 //
 // Writes beside the deck:
 //   out/<slug>.pdf          the file you upload to LinkedIn (one 1080x1350 page per slide)
@@ -17,7 +17,7 @@ import { pathToFileURL } from "node:url";
 
 const input = process.argv[2];
 if (!input) {
-  console.error("Usage: node templates/linkedin-carousel/render.mjs <path/to/deck.html>");
+  console.error("Usage: node systems/linkedin-carousel/kit/render.mjs <path/to/deck.html>");
   process.exit(2);
 }
 

@@ -4,7 +4,7 @@
     {
       "name": "carousel-preview",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-I", "templates/linkedin-carousel/serve.py", "4173"],
+      "runtimeArgs": ["-I", "systems/linkedin-carousel/kit/serve.py", "4173"],
       "port": 4173
     }
   ]
