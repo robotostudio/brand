@@ -196,7 +196,7 @@ const L = {
 const slidesHtml = spec.slides.map((s, i) => {
   const fn = L[s.layout];
   if (!fn) throw new Error(`Slide ${i + 1}: unknown layout "${s.layout}". Use one of: ${Object.keys(L).join(", ")}`);
-  const attrs = [s.meta != null ? `data-meta="${esc(s.meta)}"` : "", s.swipe ? `data-swipe="${esc(s.swipe)}"` : ""].filter(Boolean).join(" ");
+  const attrs = [s.meta != null ? `data-meta="${esc(s.meta)}"` : "", s.swipe ? `data-swipe="${esc(s.swipe)}"` : "", s.headerFace === false ? `data-header-face="false"` : ""].filter(Boolean).join(" ");
   return `<section class="slide${s.invert ? " invert" : ""}"${attrs ? ` ${attrs}` : ""}>\n  ${fn(s, i)}\n</section>`;
 }).join("\n\n");
 

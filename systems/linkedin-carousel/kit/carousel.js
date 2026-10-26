@@ -49,8 +49,10 @@
     const head = document.createElement("div");
     head.className = "chrome-head";
     // A slide with its own large .cover-byline keeps the wordmark only, so the byline is not drawn twice.
+    // data-header-face="false" drops the small header photo on that slide only. Name and role stay.
     const ownByline = isPerson && slide.querySelector(".cover-byline");
-    head.innerHTML = isPerson ? (ownByline ? `<span></span>${logo}` : `${byline(author)}${logo}`) : `${logo}<div class="meta">${meta}</div>`;
+    const headerByline = !isPerson ? "" : slide.dataset.headerFace === "false" ? byline(author, "byline", undefined, false) : byline(author);
+    head.innerHTML = isPerson ? (ownByline ? `<span></span>${logo}` : `${headerByline}${logo}`) : `${logo}<div class="meta">${meta}</div>`;
 
     const foot = document.createElement("div");
     foot.className = "chrome-foot";
