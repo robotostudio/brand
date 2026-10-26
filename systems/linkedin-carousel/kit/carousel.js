@@ -27,8 +27,8 @@
   const registry = [...document.scripts].find((s) => /authors\/authors\.js(\?|$)/.test(s.src));
   const avatarUrl = (a) => (a.avatar && registry ? new URL(a.avatar, registry.src).href : "");
   const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2);
-  const byline = (a, cls = "byline", role = a.role || "") => {
-    const face = avatarUrl(a)
+  const byline = (a, cls = "byline", role = a.role || "", withFace = true) => {
+    const face = !withFace ? "" : avatarUrl(a)
       ? `<img class="face" src="${avatarUrl(a)}" alt="">`
       : `<span class="face initials">${initials(a.name)}</span>`;
     return `<div class="${cls}">${face}<div class="who"><span class="name">${a.name}</span><span class="role">${role}</span></div></div>`;
@@ -48,7 +48,11 @@
 
     const head = document.createElement("div");
     head.className = "chrome-head";
-    head.innerHTML = isPerson ? `${byline(author)}${logo}` : `${logo}<div class="meta">${meta}</div>`;
+    // A slide with its own large .cover-byline keeps the wordmark only, so the byline is not drawn twice.
+    // data-header-face="false" drops the small header photo on that slide only. Name and role stay.
+    const ownByline = isPerson && slide.querySelector(".cover-byline");
+    const headerByline = !isPerson ? "" : slide.dataset.headerFace === "false" ? byline(author, "byline", undefined, false) : byline(author);
+    head.innerHTML = isPerson ? (ownByline ? `<span></span>${logo}` : `${headerByline}${logo}`) : `${logo}<div class="meta">${meta}</div>`;
 
     const foot = document.createElement("div");
     foot.className = "chrome-foot";
@@ -58,10 +62,17 @@
     slide.append(head, foot);
   });
 
+  // Large byline on the cover of a person's deck. Company decks drop the placeholder.
+  document.querySelectorAll(".cover-byline").forEach((el) => {
+    if (!isPerson) { el.remove(); return; }
+    el.innerHTML = byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio");
+  });
+
   // Signature card for the last slide of a person's deck
   document.querySelectorAll(".signature").forEach((el) => {
     if (!isPerson) return;
-    el.innerHTML = `${byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio")}<span class="h3 url">robotostudio.com ${chevron}</span>`;
+    const withFace = !el.classList.contains("no-face");
+    el.innerHTML = `${byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio", withFace)}<span class="h3 url">robotostudio.com ${chevron}</span>`;
   });
 
   // Inline chevrons wherever a deck writes <i class="chev"></i>

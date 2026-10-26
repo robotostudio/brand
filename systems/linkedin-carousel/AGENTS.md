@@ -2,6 +2,14 @@
 
 The rules are in [README.md](README.md) and the files it lists. Read them in the order given; this file adds only the agent's run order.
 
+## Cloud agents
+
+Build from a brief with the spec kit. Do not commit the deck. Follow [CLOUD.md](CLOUD.md).
+
+## Hand-built HTML decks
+
+Use this when maintaining the starter, the specimen, the cover studies, or a deck that already lives in git as `deck.html`.
+
 1. **Brief.** Use the brief you were given. If it's a file, it follows [carousels/BRIEF.md](../../carousels/BRIEF.md). If the account isn't stated, use `company`. Read that account's profile in [authors/](authors/).
 2. **Plan.** Pick a format ([copy.md](copy.md) §2) and write the deck as one line per slide in `caption.md`. Cut until each line is one idea.
 3. **Build.** `cp -R systems/linkedin-carousel/starter carousels/<yyyy-mm-slug>`, set `data-author`, then compose slides from [components.md](components.md) and the [specimen](specimen/deck.html).

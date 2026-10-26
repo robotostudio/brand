@@ -37,6 +37,7 @@ brand-monorepo/
 | Instructions for a discipline, channel or format | [systems/](systems/) |
 | An approved file someone can use in production | [assets/](assets/) |
 | A reusable starting point someone can copy and adapt | [templates/](templates/) |
-| A LinkedIn carousel deck (source and caption; the PDF is rebuilt, not committed) | [carousels/](carousels/) |
+| A hand-built LinkedIn carousel (source and caption; the PDF is rebuilt, not committed) | [carousels/](carousels/) |
+| A spec-built carousel from a cloud agent (never committed; render returned as artifacts) | [carousels/_work/](carousels/_work/) |
 
 A system that ships its own tooling keeps it inside its folder (for example `systems/linkedin-carousel/kit/`), so rules and code change together. Systems and templates build on `design.md`. Link to shared rules instead of duplicating them. Document format-specific adaptations in the relevant system and resolve conflicts with the shared guidance.

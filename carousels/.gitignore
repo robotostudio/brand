@@ -1,3 +1,16 @@
-# Rendered output is rebuilt from deck.html, so only the reference example keeps it in git.
+# Rendered output is rebuilt from source. The reference deck
+# carousels/2026-10-content-model/ keeps its out/ in git. Do not ignore that folder.
 */out/
 !2026-10-content-model/out/
+
+# Spec-kit working decks (carousels/_work/<slug>/). Ignored in full except this folder's README:
+# spec.json, caption.md, img/, and the render. A render produces out/, numbered PNGs,
+# carousel.pdf, preview.png and a generated deck.html. None of those are committed.
+# This does not match the tracked reference deck carousels/2026-10-content-model/.
+/_work/*
+!/_work/README.md
+/_work/**/out/
+/_work/**/*.png
+/_work/**/*.pdf
+/_work/**/preview.png
+/_work/**/deck.html
