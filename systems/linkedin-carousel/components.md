@@ -15,8 +15,9 @@ Treat these as a vocabulary, not a set of fixed layouts. Combine them freely ins
 
 | Knob | Effect |
 |---|---|
+| `<body data-author="jono">` | Posting account, a key from `authors/authors.js` (`company`, `jono`, `sne`; default `company`). A person account puts their headshot, name and role in the header and moves the wordmark to the right. Every deck loads `authors/authors.js` before `kit/carousel.js`. |
 | `<body data-theme="dark">` / `"light"` | Deck theme. Dark is the default and the recommendation. |
-| `<body data-series="Field notes">` | Header meta text on every slide (keep it 1-3 words, or empty). |
+| `<body data-series="Field notes">` | Header meta text on every slide, company decks only (keep it 1-3 words, or empty). |
 | `<section class="slide" data-meta="…">` | Header meta for one slide. |
 | `data-swipe="Keep going"` | Swipe pill label for one slide (rarely needed). |
 | `data-chrome="bare"` | Rails only, no header or footer. Avoid; the research favours a consistent frame. |
@@ -64,7 +65,8 @@ Each move below has a job. Pick the move for the job, then write copy to fit it.
 | **Cells** | `.cells` with `style="--cols: 2"` | 4-6 parallel items with equal weight | Labels + 1-3 word `.h3`s. Never icons. |
 | **Quote** | `p.quote` + `.label` attribution | A real line from a client or the team | Real and attributed. Pairs well with `.invert`. |
 | **Stack** | `.chips` of `.chip`, optional `.tile` with one mark | Name the tools without logo soup | Text chips over logos. One `.tile` max. |
-| **CTA** | `.cta-box` with `.label` URL + `.h3` "Get in touch <i class="chev"></i>" | Close | Last slide only. |
+| **CTA** | `.cta-box` with `.label` URL + `.h3` "Get in touch <i class="chev"></i>" | Close (company page) | Last slide only. |
+| **Signature** | `<div class="signature"></div>` (filled by the frame) | Close (person account) | Last slide only. Replaces the `.cta-box`. |
 
 ## Cover art
 

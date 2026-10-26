@@ -149,6 +149,26 @@ img { display: block; max-width: 100%; }
   background: var(--logo) no-repeat left center / contain;
 }
 
+/* Byline: a person account's headshot, name and role (header and signature card) */
+.byline { display: flex; align-items: center; gap: 20px; }
+.byline .face {
+  width: 64px; height: 64px; flex: none; object-fit: cover;
+  border: var(--hair) solid var(--line); background: var(--surface-2);
+  filter: grayscale(1);
+}
+.byline .initials { display: grid; place-items: center; font: 400 var(--t-label)/1 var(--mono); color: var(--fg); }
+.byline .who { display: flex; flex-direction: column; gap: 8px; }
+.byline .name { font: 400 30px/1 var(--font); letter-spacing: -0.01em; color: var(--fg); }
+.byline .role { white-space: nowrap; font: 400 var(--t-label)/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.byline.large .face { width: 120px; height: 120px; }
+.byline.large .name { font-size: var(--t-h3); letter-spacing: -0.03em; }
+.byline.large .who { gap: 14px; }
+
+/* Signature card: the last slide of a person's deck, in place of .cta-box */
+.signature { border: var(--hair) solid var(--line); padding: var(--s3); display: flex; flex-direction: column; gap: var(--s3); }
+.signature .url { display: flex; align-items: center; gap: 20px; padding-top: var(--s3); border-top: var(--hair) solid var(--line); }
+.signature:empty { display: none; }
+
 /* Content area: everything between the rails and bands */
 .content {
   position: absolute;

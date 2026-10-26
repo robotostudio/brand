@@ -73,7 +73,7 @@ Swiping should feel like a beat: loud, quiet, loud, artefact, quiet. Alternate:
 Don't put three structurally identical slides in a row, **unless repetition is the format** (numbered rules, bad vs good). Then make the repetition exact: same layout, same positions, only the content changes. A deliberate series looks designed. A near-miss series looks sloppy.
 
 ### 8. Fixed frame, varied content
-The frame never changes: rails, header with the wordmark, counter, swipe pill. The deck has one theme (dark by default). One slide may invert (`.invert`) to mark the turn of the story or the payoff, and only one.
+The frame never changes: rails, header, counter, swipe pill. The header follows the posting account: the wordmark and series name for the company page, or the author's headshot, name and role with the wordmark on the right for a person. It's still one brand; only the byline changes. The deck has one theme (dark by default). One slide may invert (`.invert`) to mark the turn of the story or the payoff, and only one.
 
 ### 9. Rewrite copy to fit the layout
 If text doesn't fit, cut words. Don't reduce the type size, add a line or squeeze the leading. The type scale is fixed for legibility on a phone. The words can change; the sizes can't.
@@ -134,7 +134,7 @@ These are the marks of a generic, AI-made carousel. Each one is a reason to redo
 
 **Last slide**
 - Bad: "Thanks for reading! Follow us for more tips 👇"
-- Good: a three-line recap list, then "What broke in <dim>your last migration?</dim>", then the CTA box
+- Good: a three-line recap list, then "What broke in <dim>your last migration?</dim>", then the CTA box (or the signature card on a person's deck)
 
 ## The phone test
 

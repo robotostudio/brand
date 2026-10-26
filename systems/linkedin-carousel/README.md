@@ -11,12 +11,13 @@ It builds on [design.md](../../design.md) and never contradicts it.
 3. [copy.md](copy.md): topics, formats, cover hooks, slide copy, facts, the caption.
 4. [components.md](components.md): the kit's vocabulary and markup.
 5. [critique.md](critique.md): the render-look-fix loop and handover.
+6. [authors/](authors/): the profile for the account the deck posts from (`company.md`, `jono.md`, `sne.md`).
 
 Background: [research.md](research.md), the October 2026 study of carousels in our niche that these rules come from.
 
 ## Workflow
 
-1. **Brief.** Get the topic, the audience's pain and any real material: screenshots, numbers, client names, code. Don't invent what's missing; mark it TBC.
+1. **Brief.** Get the topic, the audience's pain, **which account will post it**, and any real material: screenshots, numbers, client names, code. Don't invent what's missing; mark it TBC. Read that account's profile in [authors/](authors/) before you write a word.
 2. **Choose the format** from [copy.md](copy.md) §2.
 3. **Write the deck as text**, one line per slide, in `caption.md` or a scratch note. Read it top to bottom. Cut until each line is one idea.
 4. **Set up the folder:**
@@ -65,6 +66,7 @@ systems/linkedin-carousel/      everything needed to make a carousel (you are he
 │   ├── carousel.js             draws the frame on every slide
 │   ├── render.mjs              HTML → PDF + PNGs + contact sheet + lint
 │   └── serve.py                local preview server (no caching)
+├── authors/                    posting accounts: profiles, headshots, authors.js registry
 ├── starter/                    copy this to start a deck
 ├── specimen/                   every component, rendered
 └── cover-studies/              one cover in all four art forms, plus type only

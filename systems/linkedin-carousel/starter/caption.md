@@ -1,5 +1,7 @@
 # [Deck title]
 
+**Account:** [company | jono | sne] (profile in systems/linkedin-carousel/authors/)
+
 ## Slide plan
 
 01 [cover]

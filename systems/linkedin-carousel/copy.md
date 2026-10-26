@@ -2,7 +2,7 @@
 
 Writing comes before layout. Write the whole deck as plain text first (one line per slide), read it top to bottom, cut, and only then build it.
 
-The voice is Roboto's: British, dry, understated, half the words you think you need. Posts usually go out from Jono's profile, so captions are first person and blunt. The writing rules in [reports.md](https://robotostudio.com/design/reports.md) apply in full; the ones that bite most here are repeated below.
+The voice is Roboto's: British, dry, understated, half the words you think you need. Decks go out from the company page or from a person's profile (Jono, Sne). The account sets the voice: read its profile in [authors/](authors/) first, and write as that person. The rules below apply to every account. The writing rules in [reports.md](https://robotostudio.com/design/reports.md) apply in full; the ones that bite most here are repeated below.
 
 ## 1. Pick the topic: real work over advice
 
@@ -87,7 +87,7 @@ Rules:
 ## 6. The last two slides
 
 1. **Recap** (optional but recommended for list formats): a `.list.compact` of the 3-5 takeaways, `.done` squares. This is the slide people save.
-2. **Question + CTA**: one question people can answer from their own experience, in two-tone, then the `.cta-box` with `robotostudio.com` and "Get in touch". The frame hides the swipe pill on the last slide.
+2. **Question + CTA**: one question people can answer from their own experience, in two-tone, then the close. On the company page that's the `.cta-box` with `robotostudio.com` and "Get in touch". On a person's deck it's `<div class="signature"></div>`, which the frame fills with their headshot, name, role and robotostudio.com. The frame hides the swipe pill on the last slide.
 
 Good questions: "What broke in <dim>your last migration?</dim>", "Which of these <dim>did you learn the hard way?</dim>"
 Bad questions: "Thoughts?", "Agree?", "What do you think about headless CMS?"
@@ -95,6 +95,8 @@ Bad questions: "Thoughts?", "Agree?", "What do you think about headless CMS?"
 ## 7. The caption
 
 The caption is posted with the PDF and written to `caption.md` beside the deck. About 80-200 words.
+
+The caption is in the posting account's voice (see its profile in [authors/](authors/)). A person's caption is in the first person and may hold an opinion; the company page says "we" and leads with proof. Words in a real person's mouth are a draft until they approve them: list that under "Needs confirming".
 
 Structure:
 1. **Line 1**: a blunt first-person claim or a credibility line. It must work alone, because LinkedIn truncates after about 210 characters. (for example "We've moved [n] sites to Sanity. The redesign is never what loses the traffic.", with [n] a confirmed figure)
@@ -109,6 +111,8 @@ Rules: no hashtags (the top post had none), no emoji in the body (`→` is fine)
 
 ```markdown
 # <deck title>
+
+**Account:** <company | jono | sne>
 
 ## Caption
 

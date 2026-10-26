@@ -33,6 +33,7 @@ The lint catches mechanical failures. It can't tell whether a slide is good. Tha
 - [ ] **Real.** Every image is a real screenshot or artefact. Every number has a source.
 - [ ] **Readable at phone size.** Every word on the contact sheet can be read without zooming.
 - [ ] **Voice.** Sentence case, no em dashes, no filler, no exclamation marks, nothing that sounds like an ad.
+- [ ] **Account.** It sounds like the person in the header. Read a slide aloud: would they say it? Nothing claims experience their profile doesn't support.
 
 ## Scoring
 

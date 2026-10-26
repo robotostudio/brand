@@ -1,9 +1,11 @@
 // Roboto Studio LinkedIn carousel kit: draws the frame on every <section class="slide">.
 // Decks contain content only. Knobs:
-//   <body data-theme="dark|light" data-series="Field notes">   header meta text (optional)
+//   <body data-author="company|jono|…">                         posting account, from authors/authors.js (default company)
+//   <body data-theme="dark|light" data-series="Field notes">   header meta text (company decks only)
 //   <section class="slide" data-meta="Cover">                   overrides the header meta for one slide
 //   <section class="slide" data-swipe="Keep going">              overrides the swipe label for one slide
 //   <section class="slide" data-chrome="bare">                   rails only, no header or footer text
+//   <div class="signature"></div>                               filled with the author's headshot, name, role and URL
 (() => {
   const chevron =
     '<svg class="chev" viewBox="0 0 9 15" aria-hidden="true">' +
@@ -15,6 +17,23 @@
   const slides = [...document.querySelectorAll(".slide")];
   const series = document.body.dataset.series || "";
 
+  // Posting account. Person accounts put the author in the header and the wordmark on the right.
+  const authors = window.ROBOTO_AUTHORS || {};
+  const authorKey = document.body.dataset.author || "company";
+  const author = authors[authorKey] || (authorKey === "company" ? { kind: "company" } : null);
+  if (!author) document.documentElement.dataset.authorError = authorKey;
+  const isPerson = author?.kind === "person";
+
+  const registry = [...document.scripts].find((s) => /authors\/authors\.js(\?|$)/.test(s.src));
+  const avatarUrl = (a) => (a.avatar && registry ? new URL(a.avatar, registry.src).href : "");
+  const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2);
+  const byline = (a, cls = "byline", role = a.role || "") => {
+    const face = avatarUrl(a)
+      ? `<img class="face" src="${avatarUrl(a)}" alt="">`
+      : `<span class="face initials">${initials(a.name)}</span>`;
+    return `<div class="${cls}">${face}<div class="who"><span class="name">${a.name}</span><span class="role">${role}</span></div></div>`;
+  };
+
   slides.forEach((slide, i) => {
     const frame = document.createElement("div");
     frame.className = "frame";
@@ -25,10 +44,11 @@
 
     const last = i === slides.length - 1;
     const meta = slide.dataset.meta ?? series;
+    const logo = '<div class="logo" role="img" aria-label="Roboto Studio"></div>';
 
     const head = document.createElement("div");
     head.className = "chrome-head";
-    head.innerHTML = `<div class="logo" role="img" aria-label="Roboto Studio"></div><div class="meta">${meta}</div>`;
+    head.innerHTML = isPerson ? `${byline(author)}${logo}` : `${logo}<div class="meta">${meta}</div>`;
 
     const foot = document.createElement("div");
     foot.className = "chrome-foot";
@@ -36,6 +56,12 @@
     foot.innerHTML = `<div class="counter">${pad(i + 1)} / ${pad(slides.length)}</div>${swipe}`;
 
     slide.append(head, foot);
+  });
+
+  // Signature card for the last slide of a person's deck
+  document.querySelectorAll(".signature").forEach((el) => {
+    if (!isPerson) return;
+    el.innerHTML = `${byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio")}<span class="h3 url">robotostudio.com ${chevron}</span>`;
   });
 
   // Inline chevrons wherever a deck writes <i class="chev"></i>

@@ -50,6 +50,12 @@ const report = await page.evaluate(() => {
   const per = [];
   let pinkTotal = 0;
 
+  const authorError = document.documentElement.dataset.authorError;
+  if (authorError) deck.errors.push(`data-author="${authorError}" isn't in authors/authors.js. Add the author or fix the key.`);
+  const authorKey = document.body.dataset.author || "company";
+  const isPerson = !!(window.ROBOTO_AUTHORS && window.ROBOTO_AUTHORS[authorKey] && window.ROBOTO_AUTHORS[authorKey].kind === "person");
+  if (isPerson && !document.querySelector(".signature")) deck.warnings.push("Person account without a .signature on the last slide.");
+  if (!isPerson && document.querySelector(".signature")) deck.warnings.push(".signature only renders for person accounts. Use .cta-box on company decks.");
   if (!document.fonts.check("40px Geist")) deck.errors.push("Geist did not load. Check the network and the @import in carousel.css.");
   if (slides.length < 8) deck.warnings.push(`${slides.length} slides. 9-12 performs best; fewer than 8 reads as thin.`);
   if (slides.length > 14) deck.warnings.push(`${slides.length} slides. Past 14, cut or split into two posts.`);
