@@ -190,7 +190,7 @@ const L = {
     <div class="cta-box push"><span class="label">${esc(s.url || "robotostudio.com")}</span><span class="h3">${md(s.cta || "Get in touch")} <i class="chev"></i></span></div></div>`,
 
   closing: (s, i) => `${(s.anchor || "bottom") === "bottom" ? "" : tex(s.texture)}<div class="content ${s.anchor || "bottom"}">${(s.anchor || "bottom") === "bottom" ? texFill(s.texture) : ""}${eyebrow(s, i)}${heading(s, s.size || "h1")}${lead(s)}
-    ${s.signature ? '<div class="signature"></div>' : `<div class="endline${s.anchor === "bottom" || !s.anchor ? "" : " push"}"><span class="label">${esc(s.sign ?? "robotostudio.com")}</span><div class="mark-tile" role="img" aria-label="Roboto Studio"></div></div>`}</div>`,
+    ${s.signature ? `<div class="signature${s.face === false ? " no-face" : ""}"></div>` : `<div class="endline${s.anchor === "bottom" || !s.anchor ? "" : " push"}"><span class="label">${esc(s.sign ?? "robotostudio.com")}</span><div class="mark-tile" role="img" aria-label="Roboto Studio"></div></div>`}</div>`,
 };
 
 const slidesHtml = spec.slides.map((s, i) => {

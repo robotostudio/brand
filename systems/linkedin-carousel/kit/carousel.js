@@ -27,8 +27,8 @@
   const registry = [...document.scripts].find((s) => /authors\/authors\.js(\?|$)/.test(s.src));
   const avatarUrl = (a) => (a.avatar && registry ? new URL(a.avatar, registry.src).href : "");
   const initials = (name) => name.split(/\s+/).map((w) => w[0]).join("").slice(0, 2);
-  const byline = (a, cls = "byline", role = a.role || "") => {
-    const face = avatarUrl(a)
+  const byline = (a, cls = "byline", role = a.role || "", withFace = true) => {
+    const face = !withFace ? "" : avatarUrl(a)
       ? `<img class="face" src="${avatarUrl(a)}" alt="">`
       : `<span class="face initials">${initials(a.name)}</span>`;
     return `<div class="${cls}">${face}<div class="who"><span class="name">${a.name}</span><span class="role">${role}</span></div></div>`;
@@ -69,7 +69,8 @@
   // Signature card for the last slide of a person's deck
   document.querySelectorAll(".signature").forEach((el) => {
     if (!isPerson) return;
-    el.innerHTML = `${byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio")}<span class="h3 url">robotostudio.com ${chevron}</span>`;
+    const withFace = !el.classList.contains("no-face");
+    el.innerHTML = `${byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio", withFace)}<span class="h3 url">robotostudio.com ${chevron}</span>`;
   });
 
   // Inline chevrons wherever a deck writes <i class="chev"></i>

@@ -102,7 +102,7 @@ A shorter deck, or one that ends with no CTA, sets `rules` and says so in the ha
 | `prompt` | `link`: `{label, text, key}`, `prompt`: `{label, text, typo}`, `via`, `result`: `{label, before, after}` | Link, plain-English prompt, before and after stills. |
 | `steps` | `steps[]`: `{label, image, alt, position, via}` | Numbered steps, each with a screenshot. |
 | `cta` | `title`, `lead`, `url`, `cta` (button label, default "Get in touch") | Company close. This is the default last slide. |
-| `closing` | `title`, `dim`, `lead`, `sign`, `signature` | End with the R mark (`sign` defaults to robotostudio.com). `"signature": true` fills the author card instead. Use with `rules.closing` `none` or `signature`. |
+| `closing` | `title`, `dim`, `lead`, `sign`, `signature`, `face` | End with the R mark (`sign` defaults to robotostudio.com). `"signature": true` fills the author card instead. `"face": false` on that slide drops the headshot and keeps the name. The default is to show it. Use with `rules.closing` `none` or `signature`. |
 
 Images are paths relative to the spec file. Use real screenshots or video stills only. Do not invent figures, clients or quotes: write TBC and list it in `caption.md`.
 
