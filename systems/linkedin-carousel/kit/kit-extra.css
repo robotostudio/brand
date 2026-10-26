@@ -64,6 +64,16 @@
 .diagram.grow .node .h3 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -0.04em; }
 .diagram.grow .wire { height: 88px; }
 .diagram.grow .wire .label { top: 28px; }
+/* loop: the same boxes and square arrow heads, with a return rail back to the first box. */
+.diagram.loop { position: relative; padding-right: 156px; }
+.diagram.grow.loop .node .h3 { font-size: var(--t-h3); }
+.diagram.grow.loop .wire { height: 48px; }
+.diagram.loop .loopback { position: absolute; top: 0; bottom: 0; right: 4px; width: var(--hair); background: var(--muted); }
+.diagram.loop .loopback .tick { position: absolute; right: 0; width: 152px; height: var(--hair); background: var(--muted); }
+.diagram.loop .loopback .tick.top { top: 36px; }
+.diagram.loop .loopback .tick.bot { bottom: 36px; }
+.diagram.loop .loopback .tick.top::after { content: ""; position: absolute; left: -2px; top: -7px; width: 16px; height: 16px; background: var(--fg); }
+.diagram.loop .loopback .label { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); white-space: nowrap; }
 
 /* ---------- Closing slide without CTA: R mark tile ---------- */
 .mark-tile { width: 140px; height: 140px; background: var(--mark) no-repeat center / 60%; border: var(--hair) solid var(--line); flex: none; }
