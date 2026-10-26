@@ -88,7 +88,7 @@ A shorter deck, or one that ends with no CTA, sets `rules` and says so in the ha
 
 | Layout | Fields | Use |
 |---|---|---|
-| `cover` | `title`, `dim`, `lead`, `texture`, `byline`, `logos` | Hook. 3 to 10 words. `byline: true` on a person deck draws the large cover byline and keeps the header to the wordmark. `logos` is a row of real marks: `{ "image", "label", "wide", "out", "sep" }`. `image` is an SVG next to the spec, inlined at build time. |
+| `cover` | `title`, `dim`, `lead`, `texture`, `byline`, `logos` | Hook. 3 to 10 words. `byline: true` on a person deck draws the large cover byline and keeps the header to the wordmark. `logos` is a row of real marks: `{ "image", "label", "wide", "out", "sep", "scale" }`. `scale` sizes the artwork inside the tile (1 is the default) so marks with different viewBoxes can share an optical size. `image` is an SVG next to the spec, inlined at build time. |
 | `text` | `title`, `dim`, `lead`, `body`, `size` (`h1`/`h2`), `anchor` (`center`/`bottom`/`""`) | One idea. |
 | `list` | `title`, `items[]`, `compact`, `done` | 3 to 5 short items. |
 | `stat` | `value`, `title`, `source` | One sourced number. |

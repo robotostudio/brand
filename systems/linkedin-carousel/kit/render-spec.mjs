@@ -74,9 +74,18 @@ const body = (s) => s.body ? `<p class="body measure">${md(s.body)}</p>` : "";
 const source = (s) => s.source ? `<p class="label${s.sourcePush ? " push" : ""}">${esc(s.source)}</p>` : "";
 const tex = (t) => t ? `<div class="tex ${t}"></div>` : "";
 // Inline an SVG (masks and external SVG images can't be recoloured from file://). Strip <title> so it isn't read as slide text.
-const inlineSvg = (p) => fs.readFileSync(path.resolve(specDir, p), "utf8").replace(/<\?xml[^>]*>/, "").replace(/<title>.*?<\/title>/s, "");
+const inlineSvg = (p) => fs.readFileSync(path.resolve(specDir, p), "utf8")
+  .replace(/<\?xml[^>]*>/, "")
+  .replace(/<title>.*?<\/title>/s, "")
+  .replace(/>\s+</g, "><")
+  .trim();
 // Texture as a flex child of a bottom-anchored .content: header rule to the eyebrow, rail to rail.
 const texFill = (t) => t ? `<div class="tex-fill ${t.replace(/\b(top-half|bottom-half|full)\b/g, "").trim()}"></div>` : "";
+// Optical size for a cover mark. Official SVGs don't share a visual weight, so a tile can scale the artwork inside its box.
+const markScale = (l) => {
+  const n = Number(l.scale);
+  return Number.isFinite(n) && n > 0 ? ` style="transform:scale(${n})"` : "";
+};
 
 function resolveRules(spec, authorKey) {
   const r = spec.rules || {};
@@ -119,7 +128,7 @@ const L = {
   cover: (s) => s.logos
     ? `<div class="content cover-visual">
     <div class="logo-row">${s.logos.map((l) => l.sep ? `<span class="logo-sep">${esc(l.sep)}</span>` :
-      `<figure class="logo-tile${l.out ? " out" : ""}${l.wide ? " wide" : ""}"><div class="box"><span class="crop"></span>${l.out ? '<span class="strike"></span>' : ""}<div class="mark" role="img" aria-label="${esc(l.label)} logo">${inlineSvg(l.image)}</div></div><figcaption class="label">${esc(l.label)}</figcaption></figure>`).join("")}</div>
+      `<figure class="logo-tile${l.out ? " out" : ""}${l.wide ? " wide" : ""}"><div class="box"><span class="crop"></span>${l.out ? '<span class="strike"></span>' : ""}<div class="mark" role="img" aria-label="${esc(l.label)} logo"${markScale(l)}>${inlineSvg(l.image)}</div></div><figcaption class="label">${esc(l.label)}</figcaption></figure>`).join("")}</div>
     <div class="stack push">${eyebrow({ ...s, idx: s.idx ?? s.series ?? false }, 0)}${heading(s, s.size || "display", "h1")}${lead({ leadMeasure: "measure-s", ...s })}${s.byline ? '<div class="cover-byline"></div>' : ""}</div></div>`
     : `<div class="content bottom">${texFill(s.texture ?? "tex-dots fade-lb")}${eyebrow({ ...s, idx: s.idx ?? s.series ?? false }, 0)}${heading(s, s.size || "display", "h1")}${lead({ leadMeasure: "measure-s", ...s })}${s.byline ? '<div class="cover-byline"></div>' : ""}</div>`,
 

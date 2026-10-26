@@ -129,6 +129,8 @@
 .logo-tile { margin: 0; width: 200px; display: flex; flex-direction: column; gap: 28px; }
 .logo-tile.wide { width: 260px; }
 .logo-tile .box { position: relative; height: 200px; background: var(--surface); border: var(--hair) solid var(--line); display: grid; place-items: center; }
+/* Crop ticks are decoration. If the span stays in flow it becomes a second grid item and shoves the mark down. */
+.logo-tile .box > .crop { position: absolute; inset: 0; }
 .logo-tile .box::before, .logo-tile .box::after, .logo-tile .box > .crop::before, .logo-tile .box > .crop::after {
   content: ""; position: absolute; width: 32px; height: 32px; border: 0 solid var(--muted); }
 .logo-tile .box::before { top: -16px; left: -16px; border-right-width: var(--hair); border-bottom-width: var(--hair); }
@@ -136,13 +138,12 @@
 .logo-tile .box > .crop::before { top: -16px; right: -16px; border-left-width: var(--hair); border-bottom-width: var(--hair); }
 .logo-tile .box > .crop::after { bottom: -16px; left: -16px; border-right-width: var(--hair); border-top-width: var(--hair); }
 /* Logos are shown monochrome (fg colour) via mask so they sit in the zinc palette; shapes are untouched. */
-.logo-tile .mark { width: 46%; height: 46%; color: var(--fg); display: grid; place-items: center; }
+.logo-tile .mark { width: 46%; height: 46%; color: var(--fg); display: grid; place-items: center; transform-origin: center; }
 .logo-tile .mark svg { width: 100%; height: 100%; fill: currentColor; }
 .logo-tile .mark svg [fill]:not([fill="none"]) { fill: currentColor; }   /* monochrome, shapes untouched */
 .logo-tile.wide .mark { width: 76%; }
 .logo-tile.out .mark { color: var(--dim); }
 .logo-tile.out .box::selection { background: none; }
-.logo-tile.out .box > .crop { position: absolute; inset: 0; }
 .logo-tile.out .box > .strike { position: absolute; left: 12%; right: 12%; top: 50%; height: 4px; background: var(--pink); transform: rotate(-38deg); }
 .logo-tile figcaption { text-align: center; }
 .logo-sep { align-self: flex-start; margin-top: 74px; font: 400 52px/1 var(--mono); color: var(--fg); }
