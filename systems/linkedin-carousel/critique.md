@@ -4,10 +4,10 @@ A deck isn't finished when it renders. It's finished after you've looked at it a
 
 ## The loop
 
-1. Render: `node systems/linkedin-carousel/kit/render.mjs carousels/<slug>/deck.html`
+1. Render. HTML: `node systems/linkedin-carousel/kit/render.mjs --strict carousels/<slug>/deck.html`. Spec: `node systems/linkedin-carousel/kit/render-spec.mjs --strict carousels/_work/<slug>/spec.json`.
 2. Fix every `ERROR` in the lint output. Read every `warn` and either fix it or decide, for a reason you could state, to keep it.
-3. **Open `out/contact-sheet.png` and look at it.** That's the phone view. Run the checks below.
-4. Open the full-size `out/slides/NN.png` for any slide that failed a check, and fix it.
+3. **Open the contact sheet and look at it.** HTML renders write `out/contact-sheet.png`. Spec renders write `out/preview.png`. Same job: the phone view. Run the checks below.
+4. Open the full-size slide for any slide that failed a check (`out/slides/NN.png` for an HTML deck, `out/NN.png` for a spec), and fix it.
 5. Render again. Repeat until a pass changes nothing.
 
 The lint catches mechanical failures. It can't tell whether a slide is good. That part is your job.
@@ -20,7 +20,7 @@ The lint catches mechanical failures. It can't tell whether a slide is good. Tha
 - [ ] **Rhythm.** Dense and sparse slides alternate. No three near-identical slides in a row, unless it's a deliberate series and the series is exact.
 - [ ] **Story.** Read only the headlines, in order. They should tell the whole argument on their own.
 - [ ] **Pink count.** 2-4 pink moments in the deck, each one deliberate.
-- [ ] **Count.** 9-12 slides. If a slide is filler, cut it, even if that takes you to 8.
+- [ ] **Count.** 9-12 slides. If a slide is filler, cut it, even if that takes you to 8. A spec may set `rules.minSlides` and `rules.maxSlides` when the brief calls for another length. Say so in the handover. The default stays 9 to 12.
 
 ## Slide checks (each slide)
 

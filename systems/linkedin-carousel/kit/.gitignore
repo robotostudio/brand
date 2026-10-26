@@ -1,1 +1,9 @@
 node_modules/
+
+# Spec renderer output. Numbered 1080x1350 PNGs, carousel.pdf, preview.png, generated deck.html.
+# The layout specimen spec is tracked; its render (examples/**/out/) is not.
+out/
+examples/**/out/
+examples/**/preview.png
+examples/**/*.pdf
+examples/**/deck.html

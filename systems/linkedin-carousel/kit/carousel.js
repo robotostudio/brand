@@ -48,7 +48,9 @@
 
     const head = document.createElement("div");
     head.className = "chrome-head";
-    head.innerHTML = isPerson ? `${byline(author)}${logo}` : `${logo}<div class="meta">${meta}</div>`;
+    // A slide with its own large .cover-byline keeps the wordmark only, so the byline is not drawn twice.
+    const ownByline = isPerson && slide.querySelector(".cover-byline");
+    head.innerHTML = isPerson ? (ownByline ? `<span></span>${logo}` : `${byline(author)}${logo}`) : `${logo}<div class="meta">${meta}</div>`;
 
     const foot = document.createElement("div");
     foot.className = "chrome-foot";
@@ -56,6 +58,12 @@
     foot.innerHTML = `<div class="counter">${pad(i + 1)} / ${pad(slides.length)}</div>${swipe}`;
 
     slide.append(head, foot);
+  });
+
+  // Large byline on the cover of a person's deck. Company decks drop the placeholder.
+  document.querySelectorAll(".cover-byline").forEach((el) => {
+    if (!isPerson) { el.remove(); return; }
+    el.innerHTML = byline(author, "byline large", author.role ? `${author.role}, Roboto Studio` : "Roboto Studio");
   });
 
   // Signature card for the last slide of a person's deck

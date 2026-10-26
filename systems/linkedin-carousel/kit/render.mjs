@@ -4,7 +4,10 @@
 //
 //   node systems/linkedin-carousel/kit/render.mjs carousels/<slug>/deck.html
 //
-// Writes beside the deck:
+// A JSON spec uses render-spec.mjs instead (see kit/README.md):
+//   node systems/linkedin-carousel/kit/render-spec.mjs [--strict] <spec.json>
+//
+// The HTML render writes beside the deck:
 //   out/<slug>.pdf          the file you upload to LinkedIn (one 1080x1350 page per slide)
 //   out/slides/NN.png       each slide at full size
 //   out/contact-sheet.png   every slide at roughly phone size (390px wide). Look at this.
@@ -22,6 +25,11 @@ const strict = args.includes("--strict");
 const input = args.find((a) => !a.startsWith("--"));
 if (!input) {
   console.error("Usage: node systems/linkedin-carousel/kit/render.mjs [--strict] <path/to/deck.html>");
+  process.exit(2);
+}
+if (input.endsWith(".json")) {
+  console.error("A spec.json is rendered with render-spec.mjs:");
+  console.error("  node systems/linkedin-carousel/kit/render-spec.mjs [--strict] <spec.json> [--out <dir>]");
   process.exit(2);
 }
 

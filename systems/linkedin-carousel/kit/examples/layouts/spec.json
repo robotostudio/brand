@@ -1,0 +1,58 @@
+{
+  "name": "test-layouts",
+  "title": "TEST: carousel-kit layout specimen",
+  "series": "Kit test",
+  "note": "Layout specimen, not a post. rules opt out of the 9-12 slide default and the Get in touch close. The screenshot is the shared specimen image, not a copy.",
+  "rules": {
+    "minSlides": 1,
+    "maxSlides": 6,
+    "closing": "none"
+  },
+  "slides": [
+    {
+      "layout": "cover",
+      "eyebrow": "Test deck",
+      "title": "Every layout,",
+      "dim": "one render.",
+      "lead": "Test content for the carousel kit. Not for posting."
+    },
+    {
+      "layout": "text",
+      "eyebrow": "Text",
+      "title": "One idea per slide.",
+      "dim": "Large type, generous margins."
+    },
+    {
+      "layout": "code",
+      "eyebrow": "Code",
+      "title": "Real code, [[highlighted at build.]]",
+      "file": "kit/carousel.js",
+      "lang": "javascript",
+      "focus": [6, 7, 8],
+      "code": "const pad = (n) =>\n  String(n).padStart(2, \"0\");\n\n// draw the frame on every slide\nslides.forEach((slide, i) => {\n  const frame =\n    document.createElement(\"div\");\n  frame.className = \"frame\";\n  slide.prepend(frame);\n});"
+    },
+    {
+      "layout": "image",
+      "eyebrow": "Screenshot",
+      "title": "Real screenshots, [[cropped tight.]]",
+      "image": "../../../specimen/img/robotostudio-home.png",
+      "url": "robotostudio.com"
+    },
+    {
+      "layout": "diagram",
+      "eyebrow": "Diagram",
+      "title": "Spec to slides.",
+      "steps": [
+        { "label": "Input", "text": "spec.json" },
+        { "label": "Build", "text": "deck.html", "via": "spec render" },
+        { "label": "Output", "text": "PNGs and a PDF", "on": true }
+      ]
+    },
+    {
+      "layout": "closing",
+      "eyebrow": "End",
+      "title": "That's the kit.",
+      "dim": "Test only."
+    }
+  ]
+}

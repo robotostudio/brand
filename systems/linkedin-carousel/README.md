@@ -19,6 +19,8 @@ Background: [research.md](research.md), the October 2026 study of carousels in o
 
 ## Workflow
 
+Hand-built HTML decks follow the steps below. A cloud agent building from a brief uses the spec kit instead: [CLOUD.md](CLOUD.md) and [kit/README.md](kit/README.md). That path writes `spec.json` in `carousels/_work/<slug>/` (git-ignored) and does not replace this one.
+
 1. **Brief.** Get the topic, the audience's pain, **which account will post it**, and any real material: screenshots, numbers, client names, code. Don't invent what's missing; mark it TBC. Read that account's profile in [authors/](authors/) before you write a word.
 2. **Choose the format** from [copy.md](copy.md) §2.
 3. **Write the deck as text**, one line per slide, in `caption.md` or a scratch note. Read it top to bottom. Cut until each line is one idea.
@@ -43,6 +45,19 @@ Background: [research.md](research.md), the October 2026 study of carousels in o
 
 Rendered output (`out/`) for decks in `carousels/` is git-ignored: commit `deck.html`, `caption.md` and `img/`, and anyone can rebuild the PDF with one command. Only the reference decks (the specimen, the cover studies and the example deck) keep their `out/` in git so you can see finished work without rendering.
 
+## Spec kit
+
+[kit/render-spec.mjs](kit/render-spec.mjs) builds a deck from `spec.json`: numbered PNGs, `carousel.pdf`, `preview.png` and a generated `deck.html`. Layouts that the specimen does not have (code with build-time highlighting, diagram, gallery, before/after, prompt, steps, a cover logo strip, an R-mark close) live in [kit/kit-extra.css](kit/kit-extra.css). The spec renderer links this folder's `carousel.css`, `carousel.js` and `authors/`, and the shared fonts and logos in `assets/shared/`. It does not keep copies.
+
+Two choices are set per deck. Omit them and the repo defaults apply. Set them, and say so in the handover, when a deck should differ:
+
+| Choice | Default | Opt out in `spec.rules` |
+|---|---|---|
+| Length | 9 to 12 slides | `minSlides`, `maxSlides` |
+| Last slide | Company: layout `cta`, "Get in touch". Person: layout `closing` with `"signature": true` | `closing`: `cta`, `signature` (alias `author`), or `none` |
+
+A shorter deck, or one that ends with no CTA or only the author card, is a setting on that spec. It does not change the starter, the specimen or `render.mjs`.
+
 ## The non-negotiables
 
 The lint in `render.mjs` enforces most of these.
@@ -63,16 +78,21 @@ The lint in `render.mjs` enforces most of these.
 ```text
 systems/linkedin-carousel/      everything needed to make a carousel (you are here)
 ├── README.md, taste.md, copy.md, components.md, critique.md, research.md
+├── CLOUD.md                    cloud agents: spec, render, artifacts, do not commit the deck
 ├── kit/
-│   ├── carousel.css            the visual system
-│   ├── carousel.js             draws the frame on every slide
+│   ├── carousel.css            the visual system (fonts and logos from assets/shared)
+│   ├── kit-extra.css           spec-only layouts and the rail-to-rail texture fix
+│   ├── carousel.js             draws the frame on every slide, including the cover byline
 │   ├── render.mjs              HTML → PDF + PNGs + contact sheet + lint
+│   ├── render-spec.mjs         spec.json → deck.html + PNGs + carousel.pdf + preview.png
+│   ├── examples/layouts/       layout specimen spec (its out/ is git-ignored)
 │   └── serve.py                local preview server (no caching)
 ├── authors/                    posting accounts: profiles, headshots, authors.js registry
 ├── starter/                    copy this to start a deck
 ├── specimen/                   every component, rendered
 └── cover-studies/              one cover in all four art forms, plus type only
-carousels/<yyyy-mm-slug>/       the decks: one folder each, output not committed
+carousels/<yyyy-mm-slug>/       hand-built decks: source committed, out/ not
+carousels/_work/<slug>/         spec decks: git-ignored, including the render
 assets/shared/logo/             approved logo files, shared across formats
 ```
 
