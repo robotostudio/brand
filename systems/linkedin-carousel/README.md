@@ -11,6 +11,8 @@ It builds on [design.md](../../design.md) and never contradicts it.
 3. [copy.md](copy.md): topics, formats, cover hooks, slide copy, facts, the caption.
 4. [components.md](components.md): the kit's vocabulary and markup.
 5. [critique.md](critique.md): the render-look-fix loop and handover.
+
+Agents: [AGENTS.md](AGENTS.md) has the run order and delivery steps.
 6. [authors/](authors/): the profile for the account the deck posts from (`company.md`, `jono.md`, `sne.md`).
 
 Background: [research.md](research.md), the October 2026 study of carousels in our niche that these rules come from.
@@ -29,7 +31,7 @@ Background: [research.md](research.md), the October 2026 study of carousels in o
    ```bash
    node systems/linkedin-carousel/kit/render.mjs carousels/2026-11-short-slug/deck.html
    ```
-   (First time only: `npm install --prefix systems/linkedin-carousel/kit && npx --prefix systems/linkedin-carousel/kit playwright install chromium`.)
+   (First time on a machine: `bash scripts/setup.sh` from the repo root. `--strict` makes warnings fail too; agents running unattended should use it.)
 
    To watch the deck live while you edit, serve the repo and open the deck over http. Opening `deck.html` straight from disk can break its relative CSS, JS and logo paths, and you'll see unstyled text.
    ```bash

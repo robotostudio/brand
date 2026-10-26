@@ -9,15 +9,19 @@
 //   out/slides/NN.png       each slide at full size
 //   out/contact-sheet.png   every slide at roughly phone size (390px wide). Look at this.
 // Exit code 1 when the lint finds errors. Warnings are judgement calls; read them anyway.
+//
+//   --strict   treat warnings as errors too (use this for unattended agents)
 
 import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const input = process.argv[2];
+const args = process.argv.slice(2);
+const strict = args.includes("--strict");
+const input = args.find((a) => !a.startsWith("--"));
 if (!input) {
-  console.error("Usage: node systems/linkedin-carousel/kit/render.mjs <path/to/deck.html>");
+  console.error("Usage: node systems/linkedin-carousel/kit/render.mjs [--strict] <path/to/deck.html>");
   process.exit(2);
 }
 
@@ -34,6 +38,9 @@ const H = 1350;
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+// Decks must render offline: everything (fonts, logos, images) comes from the repo.
+const remote = new Set();
+page.on("request", (req) => { if (!req.url().startsWith("file:") && !req.url().startsWith("data:")) remote.add(req.url()); });
 await page.goto(pathToFileURL(deckPath).href, { waitUntil: "networkidle" });
 await page.waitForFunction(() => document.documentElement.dataset.ready === "1", null, { timeout: 10000 }).catch(() => {});
 await page.evaluate(() => document.fonts.ready);
@@ -162,20 +169,23 @@ await browser.close();
 // ---------- Report ----------
 
 const rel = (p) => path.relative(process.cwd(), p);
+if (remote.size) report.deck.warnings.push(`Loaded ${remote.size} remote file(s), e.g. ${[...remote][0]}. Put assets in the repo so renders work offline.`);
 let errorCount = report.deck.errors.length;
+let warnCount = report.deck.warnings.length;
 console.log(`\n${slug}: ${report.count} slides`);
 report.deck.errors.forEach((e) => console.log(`  ERROR  deck: ${e}`));
 report.deck.warnings.forEach((w) => console.log(`  warn   deck: ${w}`));
 report.per.forEach((s, i) => {
   const n = String(i + 1).padStart(2, "0");
   [...new Set(s.errors)].forEach((e) => { errorCount++; console.log(`  ERROR  ${n}: ${e}`); });
-  [...new Set(s.warnings)].forEach((w) => console.log(`  warn   ${n}: ${w}`));
+  [...new Set(s.warnings)].forEach((w) => { warnCount++; console.log(`  warn   ${n}: ${w}`); });
 });
 console.log(`  words per slide: ${report.per.map((s) => s.words).join(" · ")}`);
 console.log(`\n  PDF            ${rel(pdfPath)}`);
 console.log(`  Contact sheet  ${rel(path.join(outDir, "contact-sheet.png"))}`);
 console.log(`  Slides         ${rel(slidesDir)}/\n`);
-if (errorCount) {
-  console.log(`  ${errorCount} error(s). Fix them and render again.\n`);
+if (errorCount || (strict && warnCount)) {
+  const what = strict ? `${errorCount} error(s) and ${warnCount} warning(s) (--strict)` : `${errorCount} error(s)`;
+  console.log(`  ${what}. Fix them and render again.\n`);
   process.exit(1);
 }

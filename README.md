@@ -10,20 +10,22 @@ The central home for Roboto Studio's brand and design: shared rules, guidance fo
 brand-monorepo/
 ├── design.md               # Shared brand rules
 ├── README.md               # Repository map and getting started
+├── AGENTS.md               # How agents (Cursor cloud, Grok Bot) find and run a system
+├── scripts/setup.sh        # Installs every system's kit; also run by .cursor/environment.json
 ├── systems/                # Specialised execution guidance
 │   ├── linkedin-carousel/  # LinkedIn PDF carousels: rules, kit, starter, specimen
 │   ├── voice/
 │   └── motion/
 ├── assets/                 # Approved files ready to use
-│   ├── shared/             # logo/ holds the approved logo SVGs
+│   ├── shared/             # logo/ (approved SVGs) and fonts/ (Geist, local)
 │   └── motion/
 ├── templates/              # Reusable starting points
-└── carousels/              # LinkedIn carousel decks (content, not system)
+└── carousels/              # LinkedIn carousel decks and briefs (content, not system)
 ```
 
 ## Start here
 
-1. Read [design.md](design.md) for the shared brand foundation.
+1. Read [design.md](design.md) for the shared brand foundation. Agents start at [AGENTS.md](AGENTS.md).
 2. Follow the relevant [system](systems/). For LinkedIn carousels, start at [systems/linkedin-carousel](systems/linkedin-carousel/).
 3. Use [approved assets](assets/) and [templates](templates/) as they become available.
 
