@@ -157,7 +157,7 @@ const L = {
     <div class="is-good"><div class="label">${esc(s.after.label)}</div><p class="h3">${md(s.after.text)}</p></div></div></div>`,
 
   diagram: (s, i) => `<div class="content${s.anchor ? " " + s.anchor : ""}">${eyebrow(s, i)}${heading(s, s.size || "h2")}
-    <div class="diagram push">${s.steps.map((st, n) => `${n ? `<div class="wire">${st.via ? `<span class="label">${esc(st.via)}</span>` : ""}</div>` : ""}<div class="node${st.on ? " on" : ""}"><span class="label">${esc(st.label || "")}</span><span class="h3">${md(st.text)}</span></div>`).join("")}</div>${source(s)}</div>`,
+    <div class="diagram${s.grow ? " grow" : " push"}">${s.steps.map((st, n) => `${n ? `<div class="wire">${st.via ? `<span class="label">${esc(st.via)}</span>` : ""}</div>` : ""}<div class="node${st.on ? " on" : ""}"><span class="label">${esc(st.label || "")}</span><span class="h3">${md(st.text)}</span></div>`).join("")}</div>${source(s)}</div>`,
 
   prompt: (s, i) => {
     const lbl = (n, t) => `<span class="label"><span class="n">${n}</span><span>${esc(t)}</span></span>`;

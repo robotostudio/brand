@@ -58,6 +58,12 @@
 .diagram .wire { align-self: flex-start; margin-left: 56px; width: var(--hair); height: 56px; background: var(--muted); position: relative; }
 .diagram .wire::after { content: ""; position: absolute; left: -7px; bottom: -2px; width: 16px; height: 16px; background: var(--fg); }
 .diagram .wire .label { position: absolute; left: 36px; top: 14px; white-space: nowrap; }
+/* grow: the boxes are the slide, under a short line. Default diagram stays a compact stack. */
+.diagram.grow { flex: 1; min-height: 0; }
+.diagram.grow .node { flex: 1; justify-content: center; }
+.diagram.grow .node .h3 { font-size: var(--t-h2); line-height: 1.04; letter-spacing: -0.04em; }
+.diagram.grow .wire { height: 88px; }
+.diagram.grow .wire .label { top: 28px; }
 
 /* ---------- Closing slide without CTA: R mark tile ---------- */
 .mark-tile { width: 140px; height: 140px; background: var(--mark) no-repeat center / 60%; border: var(--hair) solid var(--line); flex: none; }
@@ -111,7 +117,8 @@
 .pwire .label { position: absolute; left: 36px; top: 14px; white-space: nowrap; }
 .thumbs { display: grid; grid-template-columns: 1fr 56px 1fr; align-items: center; }
 .thumbs figure { margin: 0; border: var(--hair) solid var(--line); display: flex; flex-direction: column; }
-.thumbs figure img { width: 100%; height: 190px; object-fit: cover; object-position: right center; background: #FAFAFA; }
+/* Contain keeps a wide still whole (the text entry, the shadow) instead of cropping the label. */
+.thumbs figure img { width: 100%; height: 220px; object-fit: contain; object-position: center; background: #FAFAFA; }
 .thumbs figcaption { padding: 12px 16px; font: 400 var(--t-label)/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-top: var(--hair) solid var(--line); }
 .thumbs figure.is-good figcaption { color: var(--fg); background: var(--surface); }
 .thumbs .to { justify-self: center; font: 400 40px/1 var(--mono); color: var(--fg); }

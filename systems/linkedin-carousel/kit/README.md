@@ -97,7 +97,7 @@ A shorter deck, or one that ends with no CTA, sets `rules` and says so in the ha
 | `beforeafter` | `before` / `after`: `{label, meta, image, alt, position}` | Two stills, stacked. |
 | `gallery` | `items[]`: `{label, image, wide, position, alt}`, `cols` | Several labelled screenshots. |
 | `compare` | `before` / `after`: `{label, text}` | Text only, bad against good. |
-| `diagram` | `steps[]`: `{label, text, via, on}` | Boxes joined by wires, top to bottom. |
+| `diagram` | `steps[]`: `{label, text, via, on}`, `grow` | Boxes joined by wires, top to bottom. `grow` makes the boxes fill the frame under the line. |
 | `flow` | `steps[]`: `{label, text, on}` | Vertical timeline. |
 | `prompt` | `link`: `{label, text, key}`, `prompt`: `{label, text, typo}`, `via`, `result`: `{label, before, after}` | Link, plain-English prompt, before and after stills. |
 | `steps` | `steps[]`: `{label, image, alt, position, via}` | Numbered steps, each with a screenshot. |
